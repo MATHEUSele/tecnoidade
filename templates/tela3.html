@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Preferências</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-blue: #323dff; --bg-light: #e5f1ff; --text-dark: #2a333d; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+        body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .mobile-container { background-color: var(--bg-light); width: 100%; max-width: 414px; height: 100vh; max-height: 896px; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        @media (max-width: 420px) { .mobile-container { height: 100vh; max-height: none; box-shadow: none; } body { background-color: var(--bg-light); } }
+        .bg-shape { position: absolute; z-index: 0; border-radius: 50%; filter: blur(1px); }
+        .shape-1 { top: -10%; left: -20%; width: 350px; height: 350px; background: #d1e5fa; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .shape-2 { top: -15%; right: -15%; width: 300px; height: 300px; background: #c3dcf8; border-radius: 50% 50% 40% 60% / 60% 40% 70% 40%; }
+        .shape-3 { bottom: -5%; left: -20%; width: 380px; height: 380px; background: #c3dcf8; border-radius: 30% 70% 50% 50% / 40% 40% 60% 60%; opacity: 0.8; }
+        .shape-4 { bottom: -15%; right: -10%; width: 250px; height: 250px; background: #d4e7fb; border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+        .dots { position: absolute; width: 80px; height: 80px; background-image: radial-gradient(#aacbf0 2px, transparent 2px); background-size: 16px 16px; z-index: 1; }
+        .dots-top { top: 70px; right: 20px; }
+        .dots-bottom { bottom: 30px; left: 30%; }
+        
+        .content { position: relative; z-index: 10; padding: 15px 20px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding-bottom: 90px; }
+        .content::-webkit-scrollbar { display: none; }
+        
+        .back-btn { width: 34px; height: 34px; border-radius: 50%; background: #ffffff; border: none; color: var(--primary-blue); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-decoration: none; }
+        .action-btn { background: #ffffff; border: none; padding: 8px 15px; border-radius: 20px; font-size: 16px; font-weight: 800; color: var(--primary-blue); display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; text-decoration: none; }
+        
+        .logo-area { text-align: center; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; margin-top: -10px; }
+        .main-logo { width: 140px; margin-bottom: 0; }
+        
+        .section-card { background: white; border-radius: 20px; padding: 18px 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 15px; }
+        .section-header { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 15px; }
+        .circle-num { background: #4a81e4; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; flex-shrink: 0; }
+        .section-header h3 { color: #2a333d; font-size: 18px; font-weight: 900; margin-bottom: 2px; }
+        .section-header p { color: #2a333d; font-size: 11px; font-weight: 800; }
+        
+        .options-row { display: flex; gap: 10px; }
+        .option-box { flex: 1; border: 1px solid #2a333d; border-radius: 12px; padding: 15px 5px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background 0.2s; }
+        .option-box:active { background: #f0f0f0; }
+        .option-box.active-option { border-width: 2px; border-color: var(--primary-blue); }
+        
+        .submit-btn { width: 100%; background-color: var(--primary-blue); color: white; border: none; padding: 18px 25px; border-radius: 16px; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 15px rgba(50, 61, 255, 0.35); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+        <div class="bg-shape shape-4"></div>
+        <div class="dots dots-top"></div>
+        <div class="dots dots-bottom"></div>
+
+        <div class="content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <a href="{{ url_for('tela2') }}" class="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="#" class="action-btn"><i class="fa-solid fa-volume-high"></i> Ouvir</a>
+            </div>
+
+            <div class="logo-area">
+                <!-- Usando o logo.png que o usuario salvou -->
+                <img src="{{ url_for('static', filename='logo.png') }}" class="main-logo" onerror="this.onerror=null; this.src='https://placehold.co/140x90/e5f1ff/1b62cc?text=Logo&font=Nunito';">
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="color: #3b3b6d; font-size: 19px; font-weight: 900; line-height: 1.2; margin-bottom: 6px;">Vamos deixar tudo<br>mais confortável para você!</h2>
+                <p style="color: #2a333d; font-size: 13px; font-weight: 800; line-height: 1.2;">Ajuste as opções abaixo de jeito que<br>for melhor para seus olhos e ouvidos.</p>
+            </div>
+
+            <!-- Seção 1: Tamanho da letra -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="circle-num">1</div>
+                    <div>
+                        <h3>Tamanho da letra</h3>
+                        <p>Escolha o tamanho que fica melhor para você.</p>
+                    </div>
+                </div>
+                <div class="options-row">
+                    <div class="option-box active-option">
+                        <div style="font-size: 22px; font-weight: 900; color: #2a333d; margin-bottom: 5px;">Aa</div>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Normal</div>
+                    </div>
+                    <div class="option-box">
+                        <div style="font-size: 24px; font-weight: 900; color: #2a333d; margin-bottom: 5px;">A+</div>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Grande</div>
+                    </div>
+                    <div class="option-box">
+                        <div style="font-size: 26px; font-weight: 900; color: #2a333d; margin-bottom: 5px;">A++</div>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Muito Grande</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 2: Narração -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="circle-num">2</div>
+                    <div>
+                        <h3>Narração por áudio</h3>
+                        <p>Prefere ouvir as explicações?</p>
+                    </div>
+                </div>
+                <div class="options-row">
+                    <div class="option-box" style="flex-direction: row; gap: 8px;">
+                        <i class="fa-solid fa-volume-high" style="font-size: 20px; color: #2a333d;"></i>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Sim, quero ouvir</div>
+                    </div>
+                    <div class="option-box active-option" style="flex-direction: row; gap: 8px;">
+                        <i class="fa-solid fa-volume-xmark" style="font-size: 20px; color: #2a333d;"></i>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Prefiro ler</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 3: Contraste -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="circle-num">3</div>
+                    <div>
+                        <h3>Alto contraste</h3>
+                        <p>Aumenta o contraste das cores para<br>facilitar a leitura.</p>
+                    </div>
+                </div>
+                <div class="options-row">
+                    <div class="option-box" style="flex-direction: row; gap: 8px;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(90deg, #e0e6ed 50%, #2a333d 50%); border: 1px solid #2a333d;"></div>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Ativar Alto Contraste</div>
+                    </div>
+                    <div class="option-box active-option" style="flex-direction: row; gap: 8px;">
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #999999;"></div>
+                        <div style="font-size: 11px; font-weight: 800; color: #2a333d;">Padrão</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="position: absolute; bottom: 0; width: 100%; padding: 20px 24px; background: transparent; z-index: 20;">
+            <!-- Após salvar as preferencias, direciona para o Login, que é a raiz '/' -->
+            <a href="{{ url_for('entrar') }}" class="submit-btn">
+                <span>Salvar preferências</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Salve o arquivo da imagem que você me mandou exatamente nesta pasta com o nome:
+logo.png
+
+O sistema Flask está configurado para ler "logo.png" dessa pasta e exibir na tela principal (index.html).
