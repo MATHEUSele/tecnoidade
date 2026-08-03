@@ -4,231 +4,520 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecnoIdade - Início</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         :root {
-            --primary-blue: #323dff; 
-            --logo-blue: #1b62cc; 
-            --primary-green: #5eb05f; 
-            --bg-light: #e5f1ff; 
-            --text-dark: #2a333d; 
-            --text-muted: #5e748b; 
-            --input-bg: #ffffff; 
+            --primary-blue: #3235F2;
+            --light-blue: #E3F2FD;
+            --text-dark: #333333;
+            --text-blue: #3235F2;
+            --green: #4CAF50;
+            --white: #FFFFFF;
+            --bg-body: #E8F1FC;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
-        body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
         .mobile-container {
-            background-color: var(--bg-light); width: 100%; max-width: 414px; height: 100vh; max-height: 896px;
-            position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        @media (max-width: 420px) {
-            .mobile-container { height: 100vh; max-height: none; box-shadow: none; }
-            body { background-color: var(--bg-light); }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
         }
 
-        .bg-shape { position: absolute; z-index: 0; border-radius: 50%; filter: blur(1px); }
-        .shape-1 { top: -10%; left: -20%; width: 350px; height: 350px; background: #d1e5fa; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-        .shape-2 { top: -15%; right: -15%; width: 300px; height: 300px; background: #c3dcf8; border-radius: 50% 50% 40% 60% / 60% 40% 70% 40%; }
-        .shape-3 { bottom: -5%; left: -20%; width: 380px; height: 380px; background: #c3dcf8; border-radius: 30% 70% 50% 50% / 40% 40% 60% 60%; opacity: 0.8; }
-        .shape-4 { bottom: -15%; right: -10%; width: 250px; height: 250px; background: #d4e7fb; border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
-        .dots { position: absolute; width: 80px; height: 80px; background-image: radial-gradient(#aacbf0 2px, transparent 2px); background-size: 16px 16px; z-index: 1; }
-        .dots-top { top: 70px; right: 20px; }
-        .dots-bottom { bottom: 30px; left: 30%; }
-
-        .content { position: relative; z-index: 10; padding: 20px 24px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding-bottom: 90px; }
-        .content::-webkit-scrollbar { display: none; }
-
-        /* Componentes da Tela Início */
-        header { display: flex; justify-content: space-between; position: relative; z-index: 10; padding: 15px 0 20px; }
-        .welcome-text h1 { font-size: 30px; font-weight: 900; color: var(--text-dark); line-height: 1; letter-spacing: -0.5px; }
-        .welcome-text p { font-size: 14px; font-weight: 900; color: var(--text-dark); margin-top: 5px; }
+        .bg-wave.top-right {
+            top: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            background: #B9D9F8;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
         
-        .header-actions { display: flex; gap: 15px; }
-        .action-item { text-align: center; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; }
-        .action-icon { background: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 5px; color: var(--text-dark); cursor: pointer; }
-        .action-icon i { font-size: 20px; }
-        .action-item span { font-size: 10px; font-weight: 900; }
+        .bg-wave.bottom-right {
+            bottom: 50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+        }
 
-        .welcome-card { background: white; border-radius: 20px; display: flex; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); margin-bottom: 20px; position: relative; z-index: 10; overflow: visible;}
-        .character-box { width: 110px; flex-shrink: 0; position: relative; }
-        .character-img { width: 140px; position: absolute; bottom: -15px; left: -15px; border-radius: 20px; }
+        .bg-wave.bottom-left {
+            bottom: 150px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: #DCEAFB;
+            border-radius: 50%;
+        }
+
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-bottom: 80px; /* space for bottom nav */
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px 10px 20px;
+        }
+
+        .welcome-text h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #333;
+        }
         
-        .card-text { flex: 1; padding-left: 20px; padding-top: 5px; padding-bottom: 5px; }
-        .card-text h3 { color: #4caf50; font-size: 18px; font-weight: 900; margin-bottom: 10px; }
-        .card-text p { font-size: 13px; font-weight: 800; color: var(--text-dark); line-height: 1.3; margin-bottom: 15px; }
-        .start-btn { background: #5eb05f; color: white; text-decoration: none; padding: 10px 18px; border-radius: 20px; font-size: 14px; font-weight: 900; display: inline-flex; align-items: center; gap: 8px; }
+        .welcome-text p {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
 
-        .section-title { color: var(--primary-blue); font-size: 20px; font-weight: 900; text-align: center; margin-bottom: 20px; position: relative; z-index: 10; }
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
 
-        /* Grid e Cards Menores */
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; position: relative; z-index: 10; }
-        .grid-card { background: white; border-radius: 20px; padding: 18px 10px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.1s; }
-        .grid-card:active { transform: scale(0.97); }
-        .grid-card i { font-size: 34px; color: var(--text-dark); margin-bottom: 12px; }
-        .grid-card h4 { font-size: 13px; font-weight: 900; color: var(--text-dark); margin-bottom: 5px; }
-        .grid-card p { font-size: 11px; font-weight: 900; color: var(--text-muted); line-height: 1.2; }
-        .grid-card p.green-text { color: #4caf50; }
+        .action-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
         
-        .flex-row { display: flex; gap: 12px; margin-top: 12px; position: relative; z-index: 10; }
-        .flex-row .grid-card { flex: 1; }
-        .info-box { flex: 2; display: flex; flex-direction: column; justify-content: center; padding: 0 10px; }
-        .info-box h3 { color: var(--primary-blue); font-size: 17px; font-weight: 900; margin-bottom: 8px; text-align: center; }
-        .info-box p { font-size: 13px; font-weight: 900; color: var(--text-dark); text-align: center; line-height: 1.3; }
+        .icon-circle {
+            background-color: var(--white);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 5px;
+        }
 
-        /* CSS Simulação Logo Gov */
-        .gov-logo { width: 40px; height: 40px; border-radius: 50%; background: #1351b4; position: relative; overflow: hidden; margin-bottom: 10px; }
-        .gov-green { position: absolute; top: -5px; left: -5px; width: 30px; height: 30px; background: #00a859; border-radius: 50%; }
-        .gov-yellow { position: absolute; top: 10px; left: 10px; width: 25px; height: 25px; background: #fcd000; border-radius: 50%; }
-        .gov-blue { position: absolute; top: 8px; left: 5px; width: 30px; height: 30px; background: #1351b4; border-radius: 50%; }
+        .icon-circle svg {
+            width: 24px;
+            height: 24px;
+        }
 
-        /* CSS Simulação Logo Pix */
-        .pix-logo { font-size: 26px; font-weight: 900; color: var(--text-dark); margin: 2px 0 12px; letter-spacing: 1px; }
+        .action-icon span {
+            font-size: 10px;
+            font-weight: 700;
+        }
 
-        /* Barra de Navegação Inferior */
-        nav { position: absolute; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-between; padding: 15px 25px; box-shadow: 0 -5px 20px rgba(0,0,0,0.04); z-index: 20; border-top-left-radius: 25px; border-top-right-radius: 25px; }
-        .nav-item { text-decoration: none; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .nav-item.active { color: var(--primary-blue); }
-        .nav-item i { font-size: 22px; }
-        .nav-item span { font-size: 12px; font-weight: 900; }
+        .start-card {
+            background-color: var(--white);
+            margin: 10px 20px;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .start-card-header {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .start-card-avatar {
+            width: 100px;
+            margin-right: 15px;
+            margin-left: -10px;
+        }
+
+        .start-card-text h2 {
+            color: var(--green);
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .start-card-text p {
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .btn-start-now {
+            background-color: var(--green);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            align-self: center;
+            width: 80%;
+        }
+
+        .btn-start-now span {
+            margin-left: 8px;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 20px;
+            font-weight: 800;
+            margin: 20px 0 15px 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .grid-item {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-decoration: none;
+        }
+
+        .grid-item .icon-wrapper {
+            margin-bottom: 10px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .grid-item .icon-wrapper svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .grid-item h3 {
+            font-size: 14px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .grid-item p {
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+            line-height: 1.2;
+        }
+
+        /* Specialty icons for Gov, Pix, Banco */
+        .icon-gov {
+            width: 32px;
+            height: 32px;
+            background: conic-gradient(#4CAF50 0% 33%, #FFEB3B 33% 66%, #2196F3 66% 100%);
+            border-radius: 50%;
+        }
+        
+        .icon-pix {
+            font-size: 20px;
+            font-weight: 900;
+            color: #333;
+        }
+
+        .footer-banner {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-banner h3 {
+            color: #4C82E3;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .footer-banner p {
+            color: #333;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 0 40px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke-width: 2;
+        }
+        
+        .nav-item.active svg {
+            stroke: var(--primary-blue);
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
     </style>
 </head>
 <body>
     <div class="mobile-container">
-        <!-- Fundo Decorativo -->
-        <div class="bg-shape shape-1"></div>
-        <div class="bg-shape shape-2"></div>
-        <div class="bg-shape shape-3"></div>
-        <div class="bg-shape shape-4"></div>
-        <div class="dots dots-top"></div>
-        <div class="dots dots-bottom"></div>
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave top-right"></div>
+        <div class="bg-wave bottom-right"></div>
+        <div class="bg-wave bottom-left"></div>
 
-        <div class="content">
-            <!-- Header -->
-            <header>
+        <div class="content-layer">
+            <div class="header-top">
                 <div class="welcome-text">
-                    <h1>Olá {{ nome }}!</h1>
+                    <h1>Olá Maria!</h1>
                     <p>Que bom ter você aqui!</p>
                 </div>
                 <div class="header-actions">
-                    <div class="action-item">
-                        <div class="action-icon"><i class="fa-regular fa-bell"></i></div>
+                    <a href="#" class="action-icon">
+                        <div class="icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                        </div>
                         <span>Notificações</span>
-                    </div>
-                    <div class="action-item">
-                        <div class="action-icon"><i class="fa-solid fa-gear"></i></div>
+                    </a>
+                    <a href="#" class="action-icon">
+                        <div class="icon-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
                         <span>Configurações</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="start-card">
+                <div class="start-card-header">
+                    <div class="start-card-avatar">
+                        <!-- Avatar placeholder for the old lady -->
+                        <span style="font-size: 50px;">👵</span>
+                    </div>
+                    <div class="start-card-text">
+                        <h2>Vamos começar?</h2>
+                        <p>Você ainda não iniciou nenhuma trilha de aprendizado.</p>
+                        <p>Escolha o tema abaixo e dê o primeiro passo!</p>
                     </div>
                 </div>
-            </header>
-
-            <!-- Card Superior de Boas-Vindas -->
-            <div class="welcome-card">
-                <div class="character-box">
-                    <!-- Imagem da logo carregada da pasta static -->
-                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Avatar" class="character-img" onerror="this.onerror=null; this.src='https://placehold.co/220x150/e5f1ff/1b62cc?text=Coloque+sua+Logo.png+aqui&font=Nunito';">
-                </div>
-                <div class="card-text">
-                    <h3>Vamos começar?</h3>
-                    <p>Você ainda não iniciou nenhuma trilha de aprendizado.</p>
-                    <p>Escolha o tema abaixo e dê o primeiro passo!</p>
-                    <a href="#" class="start-btn">Começar agora <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
+                <a href="#" class="btn-start-now">Começar agora <span>➔</span></a>
             </div>
 
             <h2 class="section-title">O que deseja aprender?</h2>
 
-            <!-- Grid de Tracionamento (3 colunas) -->
-            <div class="grid">
-                <!-- Card 1 -->
-                <div class="grid-card">
-                    <i class="fa-solid fa-mobile-screen"></i>
-                    <h4>Meu Celular</h4>
-                    <p>Aprenda o básico do seu celular.</p>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="grid-card">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <h4>WhatsApp</h4>
-                    <p class="green-text">Mensagens, fotos e vídeos.</p>
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="grid-card">
-                    <!-- Representação simples do logo GOV.BR -->
-                    <div class="gov-logo">
-                        <div class="gov-green"></div>
-                        <div class="gov-yellow"></div>
-                        <div class="gov-blue"></div>
+            <div class="grid-container">
+                <a href="#" class="grid-item">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
                     </div>
-                    <h4>GOV</h4>
+                    <h3>Meu Celular</h3>
+                    <p>Aprenda o básico do seu celular.</p>
+                </a>
+                
+                <a href="curso_whatsapp.html" class="grid-item">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p style="color: #4CAF50;">Mensagens, fotos e vídeos.</p>
+                </a>
+
+                <a href="#" class="grid-item">
+                    <div class="icon-wrapper">
+                        <div class="icon-gov"></div>
+                    </div>
+                    <h3>GOV</h3>
                     <p>Aprenda a mexer no gov</p>
-                </div>
-                
-                <!-- Card 4 -->
-                <div class="grid-card">
-                    <div class="pix-logo">PIX</div>
-                    <h4>Pix</h4>
+                </a>
+
+                <a href="curso_pix.html" class="grid-item">
+                    <div class="icon-wrapper">
+                        <div class="icon-pix">PIX</div>
+                    </div>
+                    <h3>Pix</h3>
                     <p>Aprenda a fazer pix</p>
-                </div>
-                
-                <!-- Card 5 -->
-                <div class="grid-card">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <h4>Compras online</h4>
+                </a>
+
+                <a href="curso_compras_online.html" class="grid-item">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </div>
+                    <h3>Compras online</h3>
                     <p>Aprenda a fazer compras online</p>
-                </div>
-                
-                <!-- Card 6 -->
-                <div class="grid-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h4>Segurança digital</h4>
+                </a>
+
+                <a href="#" class="grid-item">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <rect x="9" y="9" width="6" height="7" rx="1"></rect>
+                        </svg>
+                    </div>
+                    <h3>Segurança digital</h3>
                     <p>Evite golpes e proteja seus dados.</p>
-                </div>
+                </a>
+                
+                <a href="curso_banco_digital.html" class="grid-item">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="10" width="18" height="10" rx="2"></rect>
+                            <path d="M3 10V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"></path>
+                            <line x1="8" y1="14" x2="8" y2="16"></line>
+                            <line x1="12" y1="14" x2="12" y2="16"></line>
+                            <line x1="16" y1="14" x2="16" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3>Banco</h3>
+                    <p>Aprenda a fazer pix</p>
+                </a>
             </div>
 
-            <!-- Linha inferior com Info Box -->
-            <div class="flex-row">
-                <div class="grid-card">
-                    <i class="fa-solid fa-building-columns"></i>
-                    <h4>Banco</h4>
-                    <p>Aprenda a fazer pix</p>
-                </div>
-                <div class="info-box">
-                    <h3>Aprenda no seu ritmo</h3>
-                    <p>Aulas simples, práticas e seguras, feitas especialmente para você.</p>
-                </div>
+            <div class="footer-banner">
+                <h3>Aprenda no seu ritmo</h3>
+                <p>Aulas simples, práticas e seguras, feitas especialmente para você.</p>
             </div>
         </div>
 
-        <!-- Menu Fixo Inferior -->
-        <nav>
-            <a href="#" class="nav-item active">
-                <i class="fa-solid fa-house"></i>
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
                 <span>Início</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-book-open"></i>
+            <a href="aprender.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
                 <span>Aprender</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <a href="buscar.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
                 <span>Buscar</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-chart-simple"></i>
+            <a href="progresso.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="20" x2="12" y2="10"></line>
+                    <line x1="18" y1="20" x2="18" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
                 <span>Progresso</span>
             </a>
             <a href="#" class="nav-item">
-                <i class="fa-regular fa-user"></i>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
                 <span>Perfil</span>
             </a>
-        </nav>
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Curso WhatsApp Vídeo Chamada</title>
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #2E7D32;
+            --text-dark: #333333;
+            --white: #FFFFFF;
+            --bg-body: #E8F1FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.bottom-right {
+            bottom: 50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            opacity: 0.5;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            padding-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .btn-back {
+            background-color: #E0E0E0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--dark-green);
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            font-weight: 800;
+            color: #444;
+        }
+
+        .btn-sound {
+            background-color: var(--primary-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .btn-sound svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .course-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            background-color: #000;
+            aspect-ratio: 16/10;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .video-text-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            max-width: 50%;
+        }
+
+        .video-pip {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .play-overlay svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            margin-left: 3px;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .video-bar {
+            flex-grow: 1;
+            height: 4px;
+            background-color: rgba(255,255,255,0.4);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .video-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+
+        .video-actions svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .simulator-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+
+        .call-container {
+            background-color: #2F4C3E; /* Dark greenish bg for call */
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .call-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .call-name {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .call-status {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .call-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+
+        .call-actions {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .call-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .call-btn-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .call-btn-circle.decline {
+            background-color: #F44336;
+        }
+        
+        .call-btn-circle.accept {
+            background-color: #4CAF50;
+        }
+
+        .call-btn-circle svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+        
+        .call-btn-circle.decline svg {
+            transform: rotate(135deg);
+        }
+
+        .call-btn span {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .instruction-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
+            text-align: center;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .bottom-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .btn-action {
+            flex: 1;
+            background-color: var(--white);
+            border: 2px solid #E0E0E0;
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-action svg {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+        }
+
+        .btn-next {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: 900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave bottom-right"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="curso_whatsapp.html" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">Curso Whatsapp</h1>
+                    <span class="header-subtitle">Aula 4 de 5</span>
+                </div>
+                <a href="#" class="btn-sound">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <h2 class="course-title">Vídeochamadas</h2>
+            <p class="course-desc">Assista ao video e depois pratique no simulador abaixo.</p>
+
+            <div class="video-container">
+                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video thumbnail" class="video-thumbnail">
+                <div class="video-text-overlay">Como fazer<br>videochamadas</div>
+                
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="video-pip" alt="PIP">
+
+                <div class="play-overlay">
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+                
+                <div class="video-controls">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>0:00/3:40</span>
+                    <div class="video-bar">
+                        <div class="video-bar-fill"></div>
+                    </div>
+                    <div class="video-actions">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 5px;"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="simulator-title">Simulador: Vídeochamada</h3>
+
+            <div class="call-container">
+                <div class="call-header">
+                    <div class="call-name">Dona Ana</div>
+                    <div class="call-status">Chamada de vídeo</div>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Dona Ana" class="call-avatar">
+                
+                <div class="call-actions">
+                    <a href="#" class="call-btn">
+                        <div class="call-btn-circle decline">
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                        </div>
+                        <span>Recusar</span>
+                    </a>
+                    
+                    <a href="#" class="call-btn">
+                        <div class="call-btn-circle accept">
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                        </div>
+                        <span>Atender</span>
+                    </a>
+                </div>
+            </div>
+
+            <p class="instruction-text">Clique em atender para iniciar a videochamada.<br>Depois, veja os botões disponíveis.</p>
+
+            <div style="flex-grow: 1;"></div>
+
+            <div class="bottom-actions">
+                <a href="#" class="btn-action">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    Ajuda
+                </a>
+                <a href="#" class="btn-action" style="border-color: #E0E0E0; color: var(--primary-green);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    Ouvir
+                </a>
+            </div>
+
+            <a href="curso_whatsapp.html" class="btn-next">
+                finalizar curso
+            </a>
+
+        </div>
+    </div>
+</body>
+</html>

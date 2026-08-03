@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Política de Privacidade</title>
+    <style>
+        :root {
+            --primary-blue: #3A45B8;
+            --text-dark: #333333;
+            --bg-body: #E8F1FC;
+            --bg-section: #C6DDF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.middle {
+            top: 40%;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: #DCEAFB;
+            border-radius: 50%;
+        }
+        
+        .bg-wave.bottom {
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            opacity: 0.5;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .btn-back {
+            background-color: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            text-decoration: none;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            font-weight: 800;
+            color: #555;
+        }
+
+        .highlight-section {
+            background-color: var(--bg-section);
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .highlight-section h2 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .highlight-section p {
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .policy-content {
+            padding: 20px;
+        }
+
+        .policy-header {
+            font-size: 16px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .policy-date {
+            font-size: 15px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .policy-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .data-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .data-list li {
+            font-size: 15px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave middle"></div>
+        <div class="bg-wave bottom"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="tela_2_boas_vindas.html" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <div class="header-text">
+                    <h1 class="header-title">Política de Privacidade</h1>
+                    <span class="header-subtitle">LGPD - Lei n° 13.709/2018</span>
+                </div>
+            </div>
+
+            <div class="highlight-section">
+                <h2>Conformidade com a LGPD</h2>
+                <p>Esta política está alinhada a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei n° 13.709/2018) e ao Marco Civil da internet (Lei n° 12.965/2014).</p>
+            </div>
+
+            <div class="policy-content">
+                <h3 class="policy-header">Política de Privacidade – Aplicativo TecnoIdade</h3>
+                
+                <p class="policy-date">Última atualização: Julho de 2026</p>
+                
+                <h3 class="section-title">1. Apresentação</h3>
+                
+                <p class="policy-text">A presente Política de Privacidade tem como objetivo explicar como o TecnoIdade coleta, utiliza, armazena e protege as informações dos usuários.</p>
+                
+                <p class="policy-text">A privacidade e a segurança dos dados são prioridades do TecnoIdade, que atua em conformidade com os princípios estabelecidos pela Lei Geral de Proteção de Dados Pessoais (LGPD – Lei n° 13.709/2018).</p>
+                
+                <p class="policy-text">Ao utilizar o aplicativo, o usuário declara estar ciente das práticas descritas nesta Política.</p>
+                
+                <h3 class="section-title">2. Dados Coletados</h3>
+                
+                <p class="policy-text">Para oferecer uma melhor experiência, o TecnoIdade poderá coletar algumas informações, tais como:</p>
+                
+                <p class="section-title">Dados fornecidos pelo usuário</p>
+                
+                <ul class="data-list">
+                    <li>Nome completo;</li>
+                    <li>Endereço de e-mail;</li>
+                    <li>Senha de acesso (armazenada de forma segura);</li>
+                </ul>
+            </div>
+            
+            <div style="height: 40px;"></div> <!-- padding bottom -->
+        </div>
+    </div>
+</body>
+</html>

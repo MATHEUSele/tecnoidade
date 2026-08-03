@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Excluir Conta Familiar</title>
+    <style>
+        :root {
+            --primary-blue: #3A45B8;
+            --text-dark: #000000;
+            --bg-body: #F4F7FB;
+            --green-tag: #8FC992;
+            --danger-red: #D32F2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: #FFFFFF;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 40px;
+            border: 4px solid #333;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-back {
+            background-color: #E8F1FC;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-right: 40px;
+        }
+
+        .profile-section {
+            background: linear-gradient(to bottom, #F0F4FA, #FFFFFF);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #E6E1F4;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d0c0e0, #e0d0f0);
+        }
+
+        .profile-name-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .profile-name {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-right: 10px;
+        }
+
+        .status-tag {
+            background-color: var(--green-tag);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .profile-age {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .content-area {
+            padding: 0 20px;
+            padding-bottom: 40px;
+            background-color: #FAFAFA;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-box {
+            background-color: white;
+            width: 85%;
+            border-radius: 0;
+            padding: 40px 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-cancel {
+            background-color: #3A45B8;
+            color: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .btn-excluir {
+            background-color: #D32F2F;
+            color: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            flex: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        
+        <div class="header-top">
+            <a href="familiar_perfil.html" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+            <h1 class="header-title">Maria das Graças</h1>
+        </div>
+
+        <div class="profile-section">
+            <div class="avatar-container">
+                <div class="avatar">
+                    <div class="avatar-placeholder"></div>
+                </div>
+            </div>
+            
+            <div class="profile-name-container">
+                <h2 class="profile-name">Maria das Graças</h2>
+                <span class="status-tag">Ativo</span>
+            </div>
+            <p class="profile-age">67 anos</p>
+        </div>
+        
+        <div class="content-area">
+            <!-- Background content hidden mostly by modal -->
+        </div>
+
+        <!-- Modal -->
+        <div class="modal-overlay">
+            <div class="modal-box">
+                <h2 class="modal-title">Tem Certeza?</h2>
+                <div class="modal-buttons">
+                    <a href="familiar_editar_perfil.html" class="btn-cancel">Cancelar</a>
+                    <a href="familiar_dashboard.html" class="btn-excluir">Excluir</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

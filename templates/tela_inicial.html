@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Tela Inicial</title>
+    <style>
+        :root {
+            --primary-blue: #3235F2;
+            --light-blue: #E3F2FD;
+            --text-dark: #333333;
+            --text-blue: #3235F2;
+            --green: #4CAF50;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #E8F1FC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--white);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.bottom {
+            bottom: -100px;
+            left: -50px;
+            width: 450px;
+            height: 400px;
+            background: #B9D9F8;
+            border-radius: 40% 60% 40% 60% / 30% 60% 40% 70%;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            height: 100%;
+            width: 100%;
+        }
+
+        .illustration {
+            margin-top: 60px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: var(--light-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid #3235F2;
+            position: relative;
+        }
+
+        .illustration img {
+            width: 200px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .logo-text h1 {
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        .logo-text h1 span.blue { color: var(--primary-blue); }
+        .logo-text h1 span.green { color: var(--green); }
+        
+        .logo-subtitle {
+            font-size: 10px;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .greeting {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .greeting h2 {
+            font-size: 42px;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .greeting p {
+            font-size: 16px;
+            color: #4A4A4A;
+            line-height: 1.4;
+            font-weight: 600;
+            padding: 0 20px;
+        }
+
+        .btn-start {
+            margin-top: 40px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            width: 90%;
+            padding: 18px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(50, 53, 242, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-start:active {
+            transform: scale(0.98);
+        }
+
+        .btn-start .icon {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .bottom-actions {
+            margin-top: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .action-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .action-card .icon-title {
+            display: flex;
+            align-items: center;
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .action-card .icon-title svg {
+            margin-right: 8px;
+        }
+
+        .action-card p {
+            font-size: 12px;
+            color: #4A4A4A;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave bottom"></div>
+
+        <div class="content-layer">
+            <div class="illustration">
+                <div style="font-size: 100px;">👵📱</div>
+            </div>
+
+            <div class="logo-text">
+                <h1><span class="blue">Tecno</span><span class="green">Idade</span></h1>
+                <div class="logo-subtitle">• APRENDA HOJE, VIVA SUA INDEPENDÊNCIA •</div>
+            </div>
+
+            <div class="greeting">
+                <h2>Ola!</h2>
+                <p>Aprenda a usar a tecnologia<br>com calma, segurança e<br>no seu ritmo !</p>
+            </div>
+
+            <a href="tela_2_boas_vindas.html" class="btn-start">
+                <div class="icon">➔</div>
+                Começar Aprendizado
+            </a>
+
+            <div class="bottom-actions">
+                <div class="action-card">
+                    <div class="icon-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        Ouvir
+                    </div>
+                    <p>Ouça esta tela<br>em voz alta</p>
+                </div>
+                
+                <div class="action-card">
+                    <div class="icon-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Ajuda
+                    </div>
+                    <p>Precisa de ajuda?<br>Clique aqui</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

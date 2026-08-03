@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Preferências</title>
+    <style>
+        :root {
+            --primary-blue: #3235F2;
+            --light-blue: #E3F2FD;
+            --text-dark: #333333;
+            --text-blue: #3235F2;
+            --green: #4CAF50;
+            --white: #FFFFFF;
+            --bg-body: #E8F1FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--white);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.bottom {
+            bottom: -100px;
+            left: -50px;
+            width: 450px;
+            height: 400px;
+            background: #B9D9F8;
+            border-radius: 40% 60% 40% 60% / 30% 60% 40% 70%;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            width: 100%;
+            padding-bottom: 100px;
+        }
+
+        .header-top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-back {
+            background: var(--white);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-ouvir {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            color: var(--primary-blue);
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-ouvir svg {
+            margin-right: 5px;
+        }
+
+        .header-illustration {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .illustration-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--light-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #3235F2;
+            font-size: 40px;
+        }
+
+        .logo-text {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-text h1 span.blue { color: var(--primary-blue); }
+        .logo-text h1 span.green { color: var(--green); }
+
+        .title-section {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .title-section h2 {
+            color: #3b5998;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .title-section p {
+            font-size: 13px;
+            color: #4A4A4A;
+            font-weight: 600;
+        }
+
+        .preferences-container {
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pref-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .pref-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .pref-number {
+            background: #4C82E3;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .pref-title h3 {
+            font-size: 18px;
+            color: #333;
+            font-weight: 800;
+        }
+
+        .pref-title p {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .options-grid {
+            display: flex;
+            gap: 10px;
+        }
+
+        .option-box {
+            flex: 1;
+            border: 1.5px solid #333;
+            border-radius: 15px;
+            padding: 15px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .option-box.active {
+            border-color: var(--primary-blue);
+            background-color: var(--light-blue);
+        }
+
+        .option-box span {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .option-box p {
+            font-size: 11px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* specific sizes for box icons */
+        .box-icon-large { font-size: 24px !important; }
+        .box-icon-xlarge { font-size: 28px !important; }
+        .box-icon-xxlarge { font-size: 32px !important; }
+
+        .btn-save {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 18px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(50, 53, 242, 0.4);
+            border: none;
+            width: calc(100% - 40px);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave bottom"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="tela_2_boas_vindas.html" class="btn-back">❮</a>
+                <a href="#" class="btn-ouvir">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    Ouvir
+                </a>
+            </div>
+
+            <div class="header-illustration">
+                <div class="illustration-circle">👵</div>
+                <div class="logo-text">
+                    <h1><span class="blue">Tecno</span><span class="green">Idade</span></h1>
+                </div>
+            </div>
+
+            <div class="title-section">
+                <h2>Vamos deixar tudo<br>mais confortável para você!</h2>
+                <p>Ajuste as opções abaixo de jeito que<br>for melhor para seus olhos e ouvidos.</p>
+            </div>
+
+            <div class="preferences-container">
+                <!-- Tamanho da Letra -->
+                <div class="pref-card">
+                    <div class="pref-header">
+                        <div class="pref-number">1</div>
+                        <div class="pref-title">
+                            <h3>Tamanho da letra</h3>
+                            <p>Escolha o tamanho que fica melhor para você.</p>
+                        </div>
+                    </div>
+                    <div class="options-grid">
+                        <div class="option-box">
+                            <span class="box-icon-large">Aa</span>
+                            <p>Normal</p>
+                        </div>
+                        <div class="option-box">
+                            <span class="box-icon-xlarge">A+</span>
+                            <p>Grande</p>
+                        </div>
+                        <div class="option-box">
+                            <span class="box-icon-xxlarge">A++</span>
+                            <p>Muito Grande</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narração por áudio -->
+                <div class="pref-card">
+                    <div class="pref-header">
+                        <div class="pref-number">2</div>
+                        <div class="pref-title">
+                            <h3>Narração por áudio</h3>
+                            <p>Prefere ouvir as explicações?</p>
+                        </div>
+                    </div>
+                    <div class="options-grid">
+                        <div class="option-box">
+                            <span>🔊</span>
+                            <p>Sim, quero ouvir</p>
+                        </div>
+                        <div class="option-box">
+                            <span>🔈</span>
+                            <p>Prefiro ler</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alto contraste -->
+                <div class="pref-card">
+                    <div class="pref-header">
+                        <div class="pref-number">3</div>
+                        <div class="pref-title">
+                            <h3>Alto contraste</h3>
+                            <p>Aumementa o contraste das cores para facilitar a leitura.</p>
+                        </div>
+                    </div>
+                    <div class="options-grid">
+                        <div class="option-box" style="flex-direction: row; padding: 10px;">
+                            <span style="font-size: 20px; margin-right: 10px;">🌓</span>
+                            <p style="font-size:12px;">Ativar Alto Contraste</p>
+                        </div>
+                        <div class="option-box" style="flex-direction: row; padding: 10px;">
+                            <span style="font-size: 20px; margin-right: 10px;">⚪</span>
+                            <p style="font-size:12px;">Padrão</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <a href="cadastro_passo_1.html" class="btn-save">Salvar preferências</a>
+    </div>
+</body>
+</html>

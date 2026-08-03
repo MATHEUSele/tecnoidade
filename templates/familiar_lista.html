@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Meus Familiares</title>
+    <style>
+        :root {
+            --primary-blue: #0000FF;
+            --text-dark: #000000;
+            --bg-body: #f0f4fa;
+            --green-tag: #8FC992;
+            --bg-card-blue: #DCEAFB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 40px;
+            border: 4px solid #333;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-back {
+            background-color: #DCEAFB;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-right: 40px;
+        }
+
+        .content-area {
+            padding: 0 20px;
+        }
+
+        .info-card {
+            background-color: var(--bg-card-blue);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-card p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .family-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ddd, #eee);
+        }
+
+        .family-info {
+            flex-grow: 1;
+        }
+
+        .family-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .family-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .family-age {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            margin-right: 10px;
+        }
+
+        .tag-active {
+            background-color: var(--green-tag);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888;
+        }
+
+        .nav-item.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke-width: 2;
+        }
+        
+        .nav-item.active svg {
+            fill: var(--primary-blue);
+            stroke: var(--primary-blue);
+        }
+
+        .nav-text {
+            font-size: 12px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        
+        <div class="header-top">
+            <a href="familiar_dashboard.html" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+            <h1 class="header-title">Familiares</h1>
+        </div>
+
+        <div class="content-area">
+            <div class="info-card">
+                <p>Acompanhe o progresso dos seus familiares cadastrados.</p>
+            </div>
+
+            <h2 class="section-title">Meus familiares</h2>
+
+            <a href="familiar_perfil.html" class="family-card">
+                <div class="avatar">
+                    <div class="avatar-placeholder"></div>
+                </div>
+                <div class="family-info">
+                    <h3 class="family-name">Maria das Graças</h3>
+                    <div class="family-details">
+                        <span class="family-age">67 anos</span>
+                        <span class="tag-active">Ativo</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="familiar_dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span class="nav-text">Início</span>
+            </a>
+            <a href="familiar_lista.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="nav-text">Familiares</span>
+            </a>
+            <a href="familiar_configuracoes.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span class="nav-text">Configurações</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

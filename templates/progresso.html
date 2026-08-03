@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Progresso</title>
+    <style>
+        :root {
+            --primary-blue: #3235F2;
+            --light-blue: #E3F2FD;
+            --text-dark: #333333;
+            --text-blue: #3235F2;
+            --green: #4CAF50;
+            --white: #FFFFFF;
+            --bg-body: #E8F1FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.top-right {
+            top: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            background: #B9D9F8;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        
+        .bg-wave.bottom-right {
+            bottom: 50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+        }
+
+        .bg-wave.bottom-left {
+            bottom: 150px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: #DCEAFB;
+            border-radius: 50%;
+        }
+
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            padding-bottom: 100px; /* space for bottom nav */
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .welcome-text p {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.2;
+            width: 80%;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .icon-circle {
+            background-color: var(--white);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            color: #333;
+            text-decoration: none;
+        }
+
+        .icon-circle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .progress-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        
+        .progress-title {
+            color: var(--primary-blue);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .progress-circle-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .progress-circle {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-blue) 0% 60%, #E0E0E0 60% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        .progress-circle-inner {
+            width: 60px;
+            height: 60px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-text {
+            color: var(--primary-blue);
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .progress-details {
+            flex-grow: 1;
+        }
+
+        .progress-details h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .progress-details p {
+            font-size: 14px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .modules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .module-item {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .module-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .module-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .module-details {
+            flex-grow: 1;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .module-header h4 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #333;
+        }
+        
+        .module-header span {
+            font-size: 12px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .module-progress-bg {
+            width: 100%;
+            height: 4px;
+            background-color: #E0E0E0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .module-progress-fill {
+            height: 100%;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
+        }
+
+        .module-arrow {
+            color: #333;
+            margin-left: 10px;
+        }
+        
+        .module-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .icon-gov {
+            width: 32px;
+            height: 32px;
+            background: conic-gradient(#4CAF50 0% 33%, #FFEB3B 33% 66%, #2196F3 66% 100%);
+            border-radius: 50%;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888;
+        }
+        
+        .nav-item.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke-width: 2;
+        }
+        
+        .nav-item.active svg {
+            stroke: var(--primary-blue);
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave top-right"></div>
+        <div class="bg-wave bottom-right"></div>
+        <div class="bg-wave bottom-left"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <div class="welcome-text">
+                    <h1>Progresso</h1>
+                    <p>Acompanhe sua evolução e veja suas conquistas</p>
+                </div>
+                <div class="header-actions">
+                    <a href="#" class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="icon-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-title">Seu progresso geral</div>
+                <div class="progress-circle-container">
+                    <div class="progress-circle">
+                        <div class="progress-circle-inner">
+                            <span class="progress-text">60%</span>
+                        </div>
+                    </div>
+                    <div class="progress-details">
+                        <h3>Parabéns, Maria!</h3>
+                        <p>você já concluiu 6 de 10</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Módulos</h2>
+
+            <div class="modules-list">
+                <a href="#" class="module-item">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                    </div>
+                    <div class="module-details">
+                        <div class="module-header">
+                            <h4>Meu celular</h4>
+                            <span>100%</span>
+                        </div>
+                        <div class="module-progress-bg">
+                            <div class="module-progress-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="module-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+                
+                <a href="curso_whatsapp.html" class="module-item">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                    </div>
+                    <div class="module-details">
+                        <div class="module-header">
+                            <h4>WhatsApp</h4>
+                            <span>66%</span>
+                        </div>
+                        <div class="module-progress-bg">
+                            <div class="module-progress-fill" style="width: 66%;"></div>
+                        </div>
+                    </div>
+                    <div class="module-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="module-item">
+                    <div class="module-icon">
+                        <div class="icon-gov"></div>
+                    </div>
+                    <div class="module-details">
+                        <div class="module-header">
+                            <h4>Gov.br</h4>
+                            <span>40%</span>
+                        </div>
+                        <div class="module-progress-bg">
+                            <div class="module-progress-fill" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class="module-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="curso_banco_digital.html" class="module-item">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="10" width="18" height="10" rx="2"></rect>
+                            <path d="M3 10V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"></path>
+                            <line x1="8" y1="14" x2="8" y2="16"></line>
+                            <line x1="12" y1="14" x2="12" y2="16"></line>
+                            <line x1="16" y1="14" x2="16" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div class="module-details">
+                        <div class="module-header">
+                            <h4>Pix e Banco</h4>
+                            <span>20%</span>
+                        </div>
+                        <div class="module-progress-bg">
+                            <div class="module-progress-fill" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                    <div class="module-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="module-item">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </div>
+                    <div class="module-details">
+                        <div class="module-header">
+                            <h4>Compras Online</h4>
+                            <span>0%</span>
+                        </div>
+                        <div class="module-progress-bg">
+                            <div class="module-progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="module-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <a href="#" class="module-item">
+                    <div class="module-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <rect x="9" y="9" width="6" height="7" rx="1"></rect>
+                        </svg>
+                    </div>
+                    <div class="module-details">
+                        <div class="module-header">
+                            <h4>Segurança Digital</h4>
+                            <span>0%</span>
+                        </div>
+                        <div class="module-progress-bg">
+                            <div class="module-progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="module-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Início</span>
+            </a>
+            <a href="aprender.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Aprender</span>
+            </a>
+            <a href="buscar.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Buscar</span>
+            </a>
+            <a href="progresso.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="20" x2="12" y2="10"></line>
+                    <line x1="18" y1="20" x2="18" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Progresso</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Perfil</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Curso WhatsApp Mensagem</title>
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #2E7D32;
+            --text-dark: #333333;
+            --white: #FFFFFF;
+            --bg-body: #E8F1FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.bottom-right {
+            bottom: 50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            opacity: 0.5;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            padding-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .btn-back {
+            background-color: #E0E0E0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--dark-green);
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            font-weight: 800;
+            color: #444;
+        }
+
+        .btn-sound {
+            background-color: var(--primary-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .btn-sound svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .course-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            background-color: #000;
+            aspect-ratio: 16/9;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .video-text-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            max-width: 60%;
+        }
+        
+        .emoji-overlay {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            font-size: 32px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .play-overlay svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            margin-left: 3px;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .video-bar {
+            flex-grow: 1;
+            height: 4px;
+            background-color: rgba(255,255,255,0.4);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .video-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+
+        .video-actions svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .simulator-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+
+        .simulator-container {
+            background-color: #E4DCD3; /* WhatsApp chat bg color */
+            border-radius: 15px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .chat-info {
+            flex-grow: 1;
+        }
+
+        .chat-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .chat-status {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 15px;
+            color: var(--dark-green);
+        }
+
+        .chat-actions svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .msg-sent {
+            background-color: #E1FFC7;
+            align-self: flex-end;
+            border-top-right-radius: 0;
+        }
+
+        .msg-received {
+            background-color: white;
+            align-self: flex-start;
+            border-top-left-radius: 0;
+        }
+
+        .msg-time {
+            font-size: 10px;
+            color: #999;
+            float: right;
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+
+        .msg-ticks {
+            color: #4FC3F7;
+            font-size: 10px;
+            float: right;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+        }
+        
+        .chat-icon {
+            color: #888;
+            margin: 0 5px;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            padding: 8px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .chat-send-btn {
+            background-color: var(--primary-green);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-left: 5px;
+        }
+        
+        .chat-send-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .instruction-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bottom-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .btn-action {
+            flex: 1;
+            background-color: var(--white);
+            border: 2px solid #E0E0E0;
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-action svg {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+        }
+
+        .btn-next {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: 900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .btn-next svg {
+            margin-left: 10px;
+            width: 24px;
+            height: 24px;
+            stroke-width: 3;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave bottom-right"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="curso_whatsapp.html" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <div class="header-center">
+                    <h1 class="header-title">Curso Whatsapp</h1>
+                    <span class="header-subtitle">Aula 2 de 5</span>
+                </div>
+                <a href="#" class="btn-sound">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <h2 class="course-title">Enviando mensagem</h2>
+            <p class="course-desc">Assista ao video e depois pratique no simulador abaixo.</p>
+
+            <div class="video-container">
+                <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video thumbnail" class="video-thumbnail">
+                <div class="video-text-overlay">Como<br>enviar<br>mensagens</div>
+                <div class="emoji-overlay">😀</div>
+                
+                <div class="play-overlay">
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+                
+                <div class="video-controls">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>0:00/3:10</span>
+                    <div class="video-bar">
+                        <div class="video-bar-fill"></div>
+                    </div>
+                    <div class="video-actions">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 5px;"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="simulator-title">Simulador: Enviar mensagem</h3>
+
+            <div class="simulator-container">
+                <div class="chat-header">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Dona Ana" class="chat-avatar">
+                    <div class="chat-info">
+                        <div class="chat-name">Dona Ana</div>
+                        <div class="chat-status">online</div>
+                    </div>
+                    <div class="chat-actions">
+                        <svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"></path></svg>
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                    </div>
+                </div>
+
+                <div class="message msg-sent">
+                    Olá! Tudo bem?
+                    <span class="msg-ticks">✓✓</span>
+                    <span class="msg-time">10:30</span>
+                </div>
+
+                <div class="message msg-received">
+                    Oi, tudo sim! E você?
+                    <span class="msg-time">10:31</span>
+                </div>
+
+                <div class="chat-input-area">
+                    <svg class="chat-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                    <input type="text" class="chat-input" placeholder="Digite sua mensagem...">
+                    <svg class="chat-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="transform: rotate(45deg);"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                    <div class="chat-send-btn">
+                        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <p class="instruction-text">Digite uma mensagem e clique em enviar para praticar.</p>
+
+            <div style="flex-grow: 1;"></div>
+
+            <div class="bottom-actions">
+                <a href="#" class="btn-action">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    Ajuda
+                </a>
+                <a href="#" class="btn-action" style="border-color: #E0E0E0; color: var(--primary-green);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    Ouvir
+                </a>
+            </div>
+
+            <a href="curso_whatsapp_fotos.html" class="btn-next">
+                Próxima aula
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+
+        </div>
+    </div>
+</body>
+</html>

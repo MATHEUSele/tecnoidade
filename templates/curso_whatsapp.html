@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Curso WhatsApp</title>
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --light-green: #E8F5E9;
+            --text-dark: #333333;
+            --text-green: #2E7D32;
+            --white: #FFFFFF;
+            --bg-body: #E8F1FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.top-right {
+            top: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            background: #B9D9F8;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        
+        .bg-wave.bottom-right {
+            bottom: 50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+        }
+
+        .bg-wave.bottom-left {
+            bottom: 150px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: #DCEAFB;
+            border-radius: 50%;
+        }
+
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+            padding-bottom: 40px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .btn-back {
+            background-color: #E0E0E0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-green);
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 40px; /* balance back button */
+        }
+
+        .progress-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            color: var(--primary-green);
+        }
+
+        .progress-details {
+            flex-grow: 1;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .progress-header span {
+            font-size: 14px;
+            font-weight: 800;
+            color: #333;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 4px;
+            background-color: #E0E0E0;
+            border-radius: 2px;
+        }
+
+        .progress-bar-fill {
+            width: 40%;
+            height: 100%;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+
+        .highlight-card {
+            background-color: #D5E8D4; /* Light greenish bg */
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .highlight-title {
+            color: var(--text-green);
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .highlight-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .highlight-text {
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .highlight-text h3 {
+            color: var(--text-green);
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .highlight-text p {
+            color: #444;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .play-btn {
+            color: var(--primary-green);
+            margin: 0 10px;
+        }
+
+        .play-btn svg {
+            width: 40px;
+            height: 40px;
+            fill: currentColor;
+        }
+
+        .phone-mockup {
+            width: 80px;
+            height: 140px;
+            background-color: #333;
+            border-radius: 12px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .phone-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            padding: 5px;
+        }
+
+        .app-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background-color: #ddd;
+        }
+        
+        .app-icon:nth-child(1) { background-color: #4CAF50; }
+        .app-icon:nth-child(2) { background-color: #2196F3; }
+        .app-icon:nth-child(3) { background-color: #F44336; }
+        .app-icon:nth-child(4) { background-color: #FFEB3B; }
+        .app-icon:nth-child(5) { background-color: #9C27B0; }
+        .app-icon:nth-child(6) { background-color: #00BCD4; }
+
+        .audio-player {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-green);
+        }
+
+        .audio-bar {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #B5D5B6;
+            margin: 0 10px;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .audio-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            color: var(--text-green);
+        }
+
+        .section-title {
+            color: var(--text-green);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .activities-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .activity-item {
+            background-color: #E2EFE3; /* Lighter green */
+            border-radius: 12px;
+            padding: 15px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            display: block;
+        }
+        
+        .activity-item h4 {
+            color: var(--text-green);
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .activity-item p {
+            font-size: 13px;
+            font-weight: 700;
+            color: #444;
+        }
+
+        .bottom-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn-action {
+            flex: 1;
+            background-color: var(--white);
+            border: 2px solid #E0E0E0;
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-green);
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-action svg {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+        }
+        
+        .btn-action.help {
+            border-color: #4CAF50;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave top-right"></div>
+        <div class="bg-wave bottom-right"></div>
+        <div class="bg-wave bottom-left"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="aprender.html" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <h1 class="header-title">Curso Whatsapp</h1>
+            </div>
+
+            <div class="progress-section">
+                <div class="whatsapp-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </div>
+                <div class="progress-details">
+                    <div class="progress-header">
+                        <span>Progresso do curso</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-card">
+                <h2 class="highlight-title">Aula 01</h2>
+                
+                <div class="highlight-content">
+                    <div class="highlight-text">
+                        <h3>Enviar<br>Mensagems</h3>
+                        <p>Aprenda a enviar mensagens de texto para seus contatos</p>
+                    </div>
+                    
+                    <div class="play-btn">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </div>
+                    
+                    <div class="phone-mockup">
+                        <div class="phone-grid">
+                            <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                            <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                            <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                            <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                            <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                            <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="audio-player">
+                    <span>0:00/2:45</span>
+                    <div class="audio-bar">
+                        <div class="audio-bar-fill"></div>
+                    </div>
+                    <div class="audio-controls">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Atividades desta aula</h2>
+
+            <div class="activities-list">
+                <a href="curso_whatsapp_conhecendo.html" class="activity-item">
+                    <h4>Conhecendo o Whatsapp</h4>
+                    <p>Veja como o Whatsapp funciona</p>
+                </a>
+                
+                <a href="curso_whatsapp_mensagem.html" class="activity-item">
+                    <h4>Enviar Mensagens</h4>
+                    <p>Aprenda como enviar Mensagens</p>
+                </a>
+                
+                <a href="curso_whatsapp_fotos.html" class="activity-item">
+                    <h4>Fotos e Videos</h4>
+                    <p>Aprenda a como enviar fotos e videos</p>
+                </a>
+                
+                <a href="curso_whatsapp_video.html" class="activity-item">
+                    <h4>Videochamadas</h4>
+                    <p>Aprenda a como atender videos chamadas</p>
+                </a>
+            </div>
+
+            <div class="bottom-actions">
+                <a href="#" class="btn-action help">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    Ajuda
+                </a>
+                <a href="#" class="btn-action">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    Ouvir
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

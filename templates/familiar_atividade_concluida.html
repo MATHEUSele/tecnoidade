@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Atividade Concluída</title>
+    <style>
+        :root {
+            --primary-blue: #1A368F;
+            --text-dark: #000000;
+            --bg-body: #F4F7FB;
+            --green-tag: #8FC992;
+            --green-bg: #EAF5EA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: #FFFFFF;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 40px;
+            border: 4px solid #333;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-back {
+            background-color: transparent;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        
+        .btn-back svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-right: 40px;
+        }
+
+        .content-area {
+            padding: 0 20px;
+            padding-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .confetti-bg {
+            position: absolute;
+            top: 100px;
+            width: 100%;
+            height: 150px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Mock confetti elements */
+        .confetti { position: absolute; }
+        .c1 { top: 20%; left: 10%; width: 10px; height: 20px; background-color: #8FC992; transform: rotate(45deg); }
+        .c2 { top: 40%; left: 20%; width: 10px; height: 10px; background-color: #F44336; transform: rotate(15deg); }
+        .c3 { top: 15%; left: 70%; width: 12px; height: 12px; background-color: #2196F3; transform: rotate(30deg); }
+        .c4 { top: 60%; left: 80%; width: 15px; height: 8px; background-color: #FFC107; transform: rotate(-45deg); }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #E6E1F4;
+            margin-bottom: 20px;
+            z-index: 2;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d0c0e0, #e0d0f0);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+
+        .course-highlight {
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+
+        .course-icon-bg {
+            width: 50px;
+            height: 50px;
+            background-color: #E6E1F4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-blue);
+        }
+
+        .course-info {
+            flex-grow: 1;
+        }
+
+        .course-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 4px;
+        }
+
+        .course-subtitle {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .status-tag {
+            background-color: var(--green-bg);
+            color: #2E7D32;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+
+        .status-tag svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
+            stroke-width: 3;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            align-self: flex-start;
+            width: 100%;
+        }
+
+        .lessons-list {
+            width: 100%;
+            background-color: #FCFCFC;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            background-color: #F0EDF6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+
+        .lesson-text {
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+
+        .lesson-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 4px;
+        }
+
+        .lesson-desc {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .check-circle {
+            width: 24px;
+            height: 24px;
+            background-color: #2E7D32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .check-circle svg {
+            width: 14px;
+            height: 14px;
+            stroke-width: 3;
+        }
+
+        .recommendation-card {
+            width: 100%;
+            background-color: var(--green-bg);
+            border-radius: 20px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .star-icon {
+            color: #4CAF50;
+            margin-right: 15px;
+        }
+
+        .recommendation-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        
+        <div class="header-top">
+            <a href="familiar_dashboard.html" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+            <h1 class="header-title">Atividade concluída</h1>
+        </div>
+
+        <div class="confetti-bg">
+            <div class="confetti c1"></div>
+            <div class="confetti c2"></div>
+            <div class="confetti c3"></div>
+            <div class="confetti c4"></div>
+        </div>
+
+        <div class="content-area">
+            
+            <div class="avatar">
+                <div class="avatar-placeholder"></div>
+            </div>
+
+            <h1 class="title">Parabéns, Maria das Graças!</h1>
+            <p class="subtitle">Você concluiu mais uma aula com sucesso!</p>
+
+            <div class="course-highlight">
+                <div class="course-icon-bg">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                </div>
+                <div class="course-info">
+                    <div class="course-title">Como identificar golpes</div>
+                    <div class="course-subtitle">Curso: Segurança Digital</div>
+                </div>
+                <div class="status-tag">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Concluída
+                </div>
+            </div>
+
+            <h2 class="section-title">O que você aprendeu:</h2>
+
+            <div class="lessons-list">
+                <div class="lesson-item">
+                    <div class="lesson-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <div class="lesson-text">
+                        <div class="lesson-title">Principais tipos de golpes digitais</div>
+                        <div class="lesson-desc">Você aprendeu sobre os golpes mais comuns na internet.</div>
+                    </div>
+                    <div class="check-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="lesson-item">
+                    <div class="lesson-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <div class="lesson-text">
+                        <div class="lesson-title">Como identificar sinais de alerta</div>
+                        <div class="lesson-desc">Você aprendeu a reconhecer mensagens e situações suspeitas.</div>
+                    </div>
+                    <div class="check-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="lesson-item">
+                    <div class="lesson-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="lesson-text">
+                        <div class="lesson-title">Exemplos de mensagens falsas</div>
+                        <div class="lesson-desc">Você viu exemplos reais de mensagens que os golpistas usam para enganar.</div>
+                    </div>
+                    <div class="check-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Próxima recomendação</h2>
+
+            <div class="recommendation-card">
+                <div class="star-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </div>
+                <div class="recommendation-text">
+                    Você está cada vez mais preparado(a) para usar a internet com segurança! 😊
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

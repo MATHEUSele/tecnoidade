@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Perfil Familiar</title>
+    <style>
+        :root {
+            --primary-blue: #3A45B8;
+            --text-dark: #000000;
+            --bg-body: #F4F7FB;
+            --green-tag: #8FC992;
+            --green-text: #2E7D32;
+            --orange-text: #F57C00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: #FFFFFF;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 40px;
+            border: 4px solid #333;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn-back {
+            background-color: #E8F1FC;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-right: 40px;
+        }
+
+        .profile-section {
+            background: linear-gradient(to bottom, #F0F4FA, #FFFFFF);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #E6E1F4;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d0c0e0, #e0d0f0);
+        }
+
+        .profile-name-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .profile-name {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-right: 10px;
+        }
+
+        .status-tag {
+            background-color: var(--green-tag);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .profile-age {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .content-area {
+            padding: 0 20px;
+            padding-bottom: 40px;
+            background-color: #FAFAFA;
+            flex-grow: 1;
+        }
+
+        .progress-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+            margin-top: -10px;
+        }
+
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 10px solid #f0f0f0;
+            border-top-color: #1A8038;
+            border-right-color: #1A8038;
+            border-bottom-color: #1A8038;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            transform: rotate(-45deg);
+        }
+        
+        .progress-circle-inner {
+            transform: rotate(45deg);
+            font-size: 28px;
+            font-weight: 900;
+            color: #1A8038;
+        }
+
+        .progress-text {
+            flex-grow: 1;
+        }
+        
+        .progress-text h3 {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .progress-text p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .courses-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .course-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+        }
+        
+        .course-icon.done {
+            background-color: #1A8038;
+        }
+        
+        .course-icon.progress {
+            background-color: #FFB300;
+        }
+
+        .course-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke-width: 3;
+        }
+
+        .course-name {
+            flex-grow: 1;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .course-status {
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .course-status.done {
+            color: #1A8038;
+        }
+
+        .course-status.progress {
+            color: #F57C00;
+        }
+
+        .course-percent {
+            font-size: 13px;
+            font-weight: 800;
+            color: #666;
+            margin-left: 10px;
+            width: 30px;
+            text-align: right;
+        }
+
+        .next-recommendation-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        
+        <div class="header-top">
+            <a href="familiar_dashboard.html" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+            <h1 class="header-title">Maria das Graças</h1>
+        </div>
+
+        <div class="profile-section">
+            <div class="avatar">
+                <div class="avatar-placeholder"></div>
+            </div>
+            <div class="profile-name-container">
+                <h2 class="profile-name">Maria das Graças</h2>
+                <span class="status-tag">Ativo</span>
+            </div>
+            <p class="profile-age">67 anos</p>
+            
+            <div style="align-self: flex-start; width: 100%;">
+                <h3 class="section-title">Progresso geral</h3>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div class="progress-card">
+                <div class="progress-circle">
+                    <div class="progress-circle-inner">75%</div>
+                </div>
+                <div class="progress-text">
+                    <h3>Você está indo muito bem!</h3>
+                    <p>Continue assim e cada dia será mais fácil.</p>
+                </div>
+            </div>
+
+            <div class="courses-card">
+                <h3 class="section-title">Cursos</h3>
+                
+                <div class="course-item">
+                    <div class="course-icon done">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="course-name">WhatsApp</div>
+                    <div class="course-status done">Concluído</div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-icon done">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="course-name">Meu Celular</div>
+                    <div class="course-status done">Concluído</div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-icon progress">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="course-name">PIX</div>
+                    <div class="course-status progress">Em andamento</div>
+                    <div class="course-percent">50%</div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-icon progress">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="course-name">Compras Online</div>
+                    <div class="course-status progress">Em andamento</div>
+                    <div class="course-percent">20%</div>
+                </div>
+            </div>
+
+            <h3 class="next-recommendation-title">Próxima recomendação</h3>
+        </div>
+
+    </div>
+</body>
+</html>

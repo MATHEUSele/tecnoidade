@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Termos de Uso</title>
+    <style>
+        :root {
+            --primary-blue: #3A45B8;
+            --text-dark: #333333;
+            --bg-body: #E8F1FC;
+            --bg-section: #C6DDF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .bg-wave.middle {
+            top: 40%;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: #DCEAFB;
+            border-radius: 50%;
+        }
+        
+        .bg-wave.bottom {
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            opacity: 0.5;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .btn-back {
+            background-color: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            text-decoration: none;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .header-subtitle {
+            font-size: 12px;
+            font-weight: 800;
+            color: #555;
+        }
+
+        .highlight-section {
+            background-color: var(--bg-section);
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .highlight-section p {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .policy-content {
+            padding: 20px;
+        }
+
+        .policy-header {
+            font-size: 16px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .policy-date {
+            font-size: 15px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #444;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .policy-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave middle"></div>
+        <div class="bg-wave bottom"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="tela_2_boas_vindas.html" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <div class="header-text">
+                    <h1 class="header-title">Termos de uso</h1>
+                    <span class="header-subtitle">Tecnoidade versão 2.0</span>
+                </div>
+            </div>
+
+            <div class="highlight-section">
+                <p>Estes termos regem o uso da plataforma Tecnoidade. Ao utilizar nossos serviços, você concorda com as condições abaixo. Leia com atenção.</p>
+            </div>
+
+            <div class="policy-content">
+                <h3 class="policy-header">Termos de Uso – Aplicativo TecnoIdade</h3>
+                
+                <p class="policy-date">Última atualização: Julho de 2026</p>
+                
+                <h3 class="section-title">1. Aceitação dos Termos</h3>
+                
+                <p class="policy-text">Bem-vindo ao TecnoIdade. Ao utilizar este aplicativo, o usuário declara que leu, compreendeu e concorda com os presentes Termos de Uso. Caso não concorde com qualquer condição aqui estabelecida, recomenda-se que não utilize o aplicativo.</p>
+                
+                <h3 class="section-title">2. Sobre o TecnoIdade</h3>
+                
+                <p class="policy-text">O TecnoIdade é uma plataforma educacional desenvolvida para promover a inclusão digital de pessoas idosas por meio de cursos, simulações, vídeos, atividades e materiais educativos sobre o uso de tecnologias no dia a dia.</p>
+                
+                <p class="policy-text">O aplicativo possui caráter exclusivamente educativo e não substitui orientações de instituições financeiras, órgãos públicos ou empresas responsáveis pelos serviços apresentados.</p>
+                
+                <h3 class="section-title">3. Cadastro e Acesso</h3>
+                
+                <p class="policy-text">Para utilizar determinadas funcionalidades, o usuário poderá realizar um cadastro fornecendo informações básicas, como nome, e-mail e senha.</p>
+            </div>
+            
+            <div style="height: 40px;"></div> <!-- padding bottom -->
+        </div>
+    </div>
+</body>
+</html>

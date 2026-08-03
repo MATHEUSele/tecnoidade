@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Vincular um idoso</title>
+    <style>
+        :root {
+            --primary-blue: #1A368F;
+            --text-dark: #000000;
+            --bg-body: #E8F1FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 896px;
+            background-color: var(--bg-body);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+        
+        .bg-wave.bottom {
+            bottom: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background: #B9D9F8;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            opacity: 0.5;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-back {
+            background-color: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-right: 20px;
+        }
+        
+        .btn-back svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        .main-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .instructions {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        .input-group-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .input-group-subtitle {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .code-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .code-box {
+            width: 50px;
+            height: 60px;
+            background-color: #DCEAFB;
+            border-radius: 8px;
+            border: none;
+            font-size: 24px;
+            font-weight: 900;
+            text-align: center;
+            color: var(--primary-blue);
+        }
+        
+        .code-box:focus {
+            outline: 2px solid var(--primary-blue);
+        }
+
+        .divider {
+            text-align: center;
+            font-weight: 900;
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+        }
+
+        .cpf-input {
+            width: 100%;
+            height: 60px;
+            background-color: white;
+            border-radius: 12px;
+            border: none;
+            padding: 0 20px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .cpf-input::placeholder {
+            color: #A0C0F0;
+        }
+
+        .cpf-hint {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: auto;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 900;
+            margin-top: 40px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Decorative Background Elements -->
+        <div class="bg-wave top"></div>
+        <div class="bg-wave bottom"></div>
+
+        <div class="content-layer">
+            <div class="header-top">
+                <a href="familiar_onboarding.html" class="btn-back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <h1 class="header-title">Vincular um idoso</h1>
+            </div>
+
+            <h2 class="main-title">Vamos vincular o idoso</h2>
+
+            <p class="instructions">
+                Peça para a pessoa que será acompanhada abrir o app: Tecnoidade<br>
+                e em: Menu > Configurações > Código do Familiar.
+            </p>
+
+            <h3 class="input-group-title">Digite o código de vínculo</h3>
+            <p class="input-group-subtitle">Informe o código exibido no<br>aplicativo do idoso</p>
+
+            <div class="code-inputs">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+                <input type="text" class="code-box" maxlength="1">
+            </div>
+
+            <div class="divider">Ou</div>
+
+            <h3 class="input-group-title">Ou digite o CPF do idoso</h3>
+            <input type="text" class="cpf-input" placeholder="000.000.000-00">
+            <p class="cpf-hint">Apenas você terá acesso a este vinculo</p>
+
+            <a href="familiar_dashboard.html" class="btn-primary">Vincular conta</a>
+
+        </div>
+    </div>
+</body>
+</html>
