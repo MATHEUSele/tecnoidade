@@ -356,12 +356,12 @@
             <h2 class="section-title">Pesquisas populares</h2>
 
             <div class="popular-grid">
-                <a href="curso_whatsapp.html" class="popular-tag">WhatsApp</a>
-                <a href="curso_banco_digital.html" class="popular-tag">Banco</a>
-                <a href="curso_pix.html" class="popular-tag">PIX</a>
+                <a href="{{ url_for('curso_whatsapp') }}" class="popular-tag">WhatsApp</a>
+                <a href="{{ url_for('curso_banco_digital') }}" class="popular-tag">Banco</a>
+                <a href="{{ url_for('curso_pix') }}" class="popular-tag">PIX</a>
                 <a href="#" class="popular-tag">Segurança<br>Digital</a>
                 <a href="#" class="popular-tag">Gov.br</a>
-                <a href="curso_compras_online.html" class="popular-tag">Compras<br>Online</a>
+                <a href="{{ url_for('curso_compras_online') }}" class="popular-tag">Compras<br>Online</a>
             </div>
 
             <div class="recent-header">
@@ -402,28 +402,28 @@
         </div>
 
         <div class="bottom-nav">
-            <a href="home.html" class="nav-item">
+            <a href="{{ url_for('home') }}" class="nav-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
                 <span>Início</span>
             </a>
-            <a href="aprender.html" class="nav-item">
+            <a href="{{ url_for('aprender') }}" class="nav-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
                 <span>Aprender</span>
             </a>
-            <a href="buscar.html" class="nav-item active">
+            <a href="{{ url_for('buscar') }}" class="nav-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
                 <span>Buscar</span>
             </a>
-            <a href="progresso.html" class="nav-item">
+            <a href="{{ url_for('progresso') }}" class="nav-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="20" x2="12" y2="10"></line>
                     <line x1="18" y1="20" x2="18" y2="4"></line>

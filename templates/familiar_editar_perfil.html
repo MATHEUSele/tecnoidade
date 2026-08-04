@@ -279,7 +279,7 @@
     <div class="mobile-container">
         
         <div class="header-top">
-            <a href="familiar_perfil.html" class="btn-back">
+            <a href="{{ url_for('familiar_perfil') }}" class="btn-back">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
@@ -349,7 +349,7 @@
                 <div class="vinculo-label">Codigo de Vinculo: <span class="vinculo-code">1-2-3-4-5</span></div>
             </div>
 
-            <a href="familiar_excluir_conta.html" class="btn-danger">Excluir Conta</a>
+            <a href="{{ url_for('familiar_excluir_conta') }}" class="btn-danger">Excluir Conta</a>
         </div>
 
     </div>

@@ -333,16 +333,16 @@
 
             <a href="#" class="btn-google">Entrar com o google</a>
 
-            <a href="home.html" class="btn-login">
+            <a href="{{ url_for('home') }}" class="btn-login">
                 Entrar na Conta <span class="icon">➔</span>
             </a>
 
-            <a href="cadastro_alternativo_1.html" class="register-link">Cadastre-se</a>
+            <a href="{{ url_for('cadastro_alternativo_1') }}" class="register-link">Cadastre-se</a>
 
             <div class="footer-terms">
                 <p>Ao entrar, você concorda com nossa</p>
-                <a href="politica_privacidade.html">POLITICA DE PRIVACIDADE</a>
-                <a href="termos_uso.html">Termos de uso</a>
+                <a href="{{ url_for('politica_privacidade') }}">POLITICA DE PRIVACIDADE</a>
+                <a href="{{ url_for('termos_uso') }}">Termos de uso</a>
             </div>
         </div>
     </div>

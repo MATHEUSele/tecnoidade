@@ -25,7 +25,7 @@
 <body>
     <div class="mobile-container">
         <div class="header">
-            <a href="aprender.html" class="btn-back"><</a>
+            <a href="{{ url_for('aprender') }}" class="btn-back"><</a>
             <h1>Banco Digital</h1>
         </div>
         <div class="content">
@@ -38,7 +38,7 @@
                 <li style="margin-bottom: 5px;">Passo 3: Conclusão</li>
             </ul>
         </div>
-        <a href="curso_concluido.html" class="btn-primary">Próxima Aula</a>
+        <a href="{{ url_for('curso_banco_aula6') }}" class="btn-primary">Próxima Aula</a>
     </div>
 </body>
 </html>
