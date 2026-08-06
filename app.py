@@ -47,7 +47,7 @@ def entrar():
             if user['tipo'] == 'idoso':
                 return redirect(url_for('home'))
             else:
-                return redirect(url_for('familiar_vincular'))
+                return redirect(url_for('familiar_dashboard'))
         else:
             erro = "Dados incorretos. Por favor, tente novamente."
             
@@ -57,17 +57,15 @@ def entrar():
 def cadastro():
     tipo = request.args.get('tipo', 'idoso')
     if request.method == 'POST':
-        # Simula o cadastro e loga o usuário automaticamente
         nome = request.form.get('nome', 'Novo Usuário')
         email = request.form.get('email', 'novo@teste.com')
-        session['email'] = email
-        session['nome'] = nome
-        session['tipo'] = tipo
+        senha = request.form.get('senha', '123')
         
-        if tipo == 'idoso':
-            return redirect(url_for('preferencias'))
-        else:
-            return redirect(url_for('familiar_vincular'))
+        # Mocking creation in dict to allow login
+        MOCK_USERS[email.lower()] = {"senha": senha, "tipo": tipo, "nome": nome}
+        
+        flash("Cadastro realizado com sucesso")
+        return redirect(url_for('entrar', tipo=tipo))
             
     return render_template('cadastro.html', tipo=tipo)
 
@@ -307,6 +305,35 @@ def login():
 @app.route('/login_biometria')
 def login_biometria():
     return render_template('login_biometria.html')
+
+@app.route('/login_biometria_action', methods=['POST'])
+def login_biometria_action():
+    # Simulando o sucesso da biometria
+    user = MOCK_USERS["maria@teste.com"]
+    session['email'] = "maria@teste.com"
+    session['nome'] = user['nome']
+    session['tipo'] = user['tipo']
+    return redirect(url_for('home'))
+
+@app.route('/vincular_conta_action', methods=['POST'])
+def vincular_conta_action():
+    flash("Vínculo efetuado com sucesso")
+    return redirect(url_for('familiar_dashboard'))
+
+@app.route('/excluir_conta_action', methods=['POST'])
+def excluir_conta_action():
+    session.clear()
+    return redirect(url_for('splash'))
+
+@app.route('/editar_perfil_action', methods=['POST'])
+def editar_perfil_action():
+    email = request.form.get('email', '').strip()
+    if not email or '@' not in email:
+        flash("Preencha todos os campos obrigatórios com formato válido", "error")
+        return redirect(request.referrer or url_for('familiar_editar_perfil'))
+    
+    flash("Alteração realizada com sucesso", "success")
+    return redirect(request.referrer or url_for('familiar_editar_perfil'))
 
 @app.route('/login_erro')
 def login_erro():

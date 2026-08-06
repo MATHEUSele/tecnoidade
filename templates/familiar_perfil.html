@@ -293,14 +293,16 @@
         </div>
 
         <div class="profile-section">
-            <div class="avatar">
-                <div class="avatar-placeholder"></div>
-            </div>
-            <div class="profile-name-container">
-                <h2 class="profile-name">Maria das Graças</h2>
-                <span class="status-tag">Ativo</span>
-            </div>
-            <p class="profile-age">67 anos</p>
+            <a href="{{ url_for('familiar_editar_perfil') }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                <div class="avatar">
+                    <div class="avatar-placeholder"></div>
+                </div>
+                <div class="profile-name-container">
+                    <h2 class="profile-name">Maria das Graças</h2>
+                    <span class="status-tag">Ativo</span>
+                </div>
+                <p class="profile-age">67 anos</p>
+            </a>
             
             <div style="align-self: flex-start; width: 100%;">
                 <h3 class="section-title">Progresso geral</h3>

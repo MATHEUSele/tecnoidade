@@ -393,13 +393,13 @@
                         <p>Escolha o tema abaixo e dê o primeiro passo!</p>
                     </div>
                 </div>
-                <a href="#" class="btn-start-now">Começar agora <span>➔</span></a>
+                <a href="{{ url_for('aprender') }}" class="btn-start-now">Começar agora <span>➔</span></a>
             </div>
 
             <h2 class="section-title">O que deseja aprender?</h2>
 
             <div class="grid-container">
-                <a href="#" class="grid-item">
+                <a href="{{ url_for('curso_celular_basico') }}" class="grid-item">
                     <div class="icon-wrapper">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
@@ -420,7 +420,7 @@
                     <p style="color: #4CAF50;">Mensagens, fotos e vídeos.</p>
                 </a>
 
-                <a href="#" class="grid-item">
+                <a href="{{ url_for('curso_gov') }}" class="grid-item">
                     <div class="icon-wrapper">
                         <div class="icon-gov"></div>
                     </div>
