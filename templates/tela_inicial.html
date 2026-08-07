@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoIdade - Tela Inicial</title>
+    <title>TecnoIdade - Perfil</title>
     <style>
         :root {
-            --primary-blue: #3235F2;
-            --light-blue: #E3F2FD;
-            --text-dark: #333333;
-            --text-blue: #3235F2;
-            --green: #4CAF50;
+            --primary-purple: #4A23D6; /* Match image title */
+            --dark-blue: #1A237E;
+            --light-bg: #F8F9FA;
             --white: #FFFFFF;
+            --green: #4CAF50;
+            --light-green: #E8F5E9;
+            --orange: #FF9800;
+            --light-orange: #FFF3E0;
+            --red: #D32F2F;
+            --text-dark: #333333;
+            --text-muted: #757575;
         }
 
         * {
@@ -22,241 +27,545 @@
         }
 
         body {
-            background-color: #E8F1FC;
+            background-color: #E0E0E0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .mobile-container {
             width: 100%;
             max-width: 414px;
             min-height: 100vh; height: 100%; margin: 0 auto;
-            background-color: var(--white);
+            background-color: var(--light-bg);
             position: relative;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            padding-bottom: 90px; /* Space for bottom nav */
         }
 
-        /* Background Waves */
-        .bg-wave {
-            position: absolute;
-            z-index: 1;
-            opacity: 0.8;
-        }
-        
-        .bg-wave.top {
-            top: -50px;
-            left: -50px;
-            width: 300px;
-            height: 300px;
-            background: #DCEAFB;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-        }
-
-        .bg-wave.bottom {
-            bottom: -100px;
-            left: -50px;
-            width: 450px;
-            height: 400px;
-            background: #B9D9F8;
-            border-radius: 40% 60% 40% 60% / 30% 60% 40% 70%;
-        }
-
-        .content-layer {
-            position: relative;
-            z-index: 2;
+        /* Top Header */
+        .header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
-            height: 100%;
-            width: 100%;
+            justify-content: space-between;
+            padding: 20px 20px 10px 20px;
         }
 
-        .illustration {
-            margin-top: 60px;
-            width: 250px;
-            height: 250px;
+        .btn-back {
+            width: 40px;
+            height: 40px;
+            background: #E8EAF6;
             border-radius: 50%;
-            background-color: var(--light-blue);
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 3px solid #3235F2;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .header-title {
+            color: var(--primary-purple);
+            font-size: 22px;
+            font-weight: 800;
+            text-align: center;
+            flex-grow: 1;
+            margin-right: 40px; /* balance the back button */
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
             position: relative;
         }
 
-        .illustration img {
-            width: 200px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .logo-text h1 {
-            font-size: 38px;
-            font-weight: 700;
-        }
-
-        .logo-text h1 span.blue { color: var(--primary-blue); }
-        .logo-text h1 span.green { color: var(--green); }
-        
-        .logo-subtitle {
-            font-size: 10px;
-            color: var(--text-dark);
-            letter-spacing: 1px;
-            margin-top: 5px;
-            font-weight: 600;
-        }
-
-        .greeting {
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        .greeting h2 {
-            font-size: 42px;
-            color: var(--primary-blue);
-            font-weight: 700;
+        .avatar-container {
+            position: relative;
             margin-bottom: 15px;
         }
 
-        .greeting p {
-            font-size: 16px;
-            color: #4A4A4A;
-            line-height: 1.4;
-            font-weight: 600;
-            padding: 0 20px;
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background-color: #E0E0E0;
+            border: 4px solid var(--white);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            overflow: hidden;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .btn-start {
-            margin-top: 40px;
-            background-color: var(--primary-blue);
-            color: var(--white);
-            width: 90%;
-            padding: 18px;
-            border-radius: 15px;
+        .edit-icon {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 32px;
+            height: 32px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: #333;
+            cursor: pointer;
+        }
+
+        .profile-name-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--dark-blue);
+        }
+
+        .status-badge {
+            background-color: var(--light-green);
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .profile-age {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 0 20px 20px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+        }
+
+        /* Progress Donut */
+        .progress-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .donut {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: conic-gradient(var(--green) 0% 75%, #EEEEEE 75% 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(50, 53, 242, 0.4);
-            transition: transform 0.2s;
         }
 
-        .btn-start:active {
-            transform: scale(0.98);
-        }
-
-        .btn-start .icon {
-            background-color: var(--white);
-            color: var(--primary-blue);
-            width: 32px;
-            height: 32px;
+        .donut-inner {
+            width: 70px;
+            height: 70px;
+            background: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--text-dark);
         }
 
-        .bottom-actions {
-            margin-top: auto;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            margin-bottom: 20px;
+        .progress-text h4 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+            line-height: 1.2;
         }
 
-        .action-card {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 15px;
-            width: 45%;
+        .progress-text p {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Courses List */
+        .course-list {
             display: flex;
             flex-direction: column;
+            gap: 15px;
+        }
+
+        .course-item {
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .course-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-check {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .icon-clock {
+            background: var(--light-orange);
+            color: var(--orange);
+        }
+
+        .course-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .course-status {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .status-concluido { color: var(--green); }
+        .status-andamento { color: var(--orange); }
+
+        /* Recommendation */
+        .recommendation {
+            margin: 0 20px 20px 20px;
+        }
+        
+        .recommendation h3 {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .link-code {
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        /* Buttons */
+        .btn-delete {
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 800;
+            width: calc(100% - 80px);
+            margin: 0 auto 30px auto;
+            display: block;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 80%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-card h2 {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-cancel {
+            background: #3949AB;
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: 800;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        .action-card .icon-title {
-            display: flex;
-            align-items: center;
-            color: var(--primary-blue);
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-        
-        .action-card .icon-title svg {
-            margin-right: 8px;
+        .btn-confirm {
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        .action-card p {
+        /* Bottom Nav (from progresso.html) */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 25px 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888;
+        }
+        
+        .nav-item.active { color: var(--primary-purple); }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke-width: 2;
+        }
+        
+        .nav-item.active svg { stroke: var(--primary-purple); }
+
+        .nav-item span {
             font-size: 12px;
-            color: #4A4A4A;
-            line-height: 1.2;
+            font-weight: 800;
         }
     </style>
 </head>
 <body>
     <div class="mobile-container">
-        <!-- Decorative Background Elements -->
-        <div class="bg-wave top"></div>
-        <div class="bg-wave bottom"></div>
-
-        <div class="content-layer">
-            <div class="illustration">
-                <div style="font-size: 100px;">👵📱</div>
-            </div>
-
-            <div class="logo-text">
-                <h1><span class="blue">Tecno</span><span class="green">Idade</span></h1>
-                <div class="logo-subtitle">• APRENDA HOJE, VIVA SUA INDEPENDÊNCIA •</div>
-            </div>
-
-            <div class="greeting">
-                <h2>Ola!</h2>
-                <p>Aprenda a usar a tecnologia<br>com calma, segurança e<br>no seu ritmo !</p>
-            </div>
-
-            <a href="{{ url_for('aprender') }}" class="btn-start">
-                <div class="icon">➔</div>
-                Começar Aprendizado
+        
+        <div class="header">
+            <a href="{{ url_for('home') }}" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
             </a>
+            <h1 class="header-title">{{ user.nome.split()[0] if user.nome else 'Perfil' }}</h1>
+        </div>
 
-            <div class="bottom-actions">
-                <div class="action-card">
-                    <div class="icon-title">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                        Ouvir
-                    </div>
-                    <p>Ouça esta tela<br>em voz alta</p>
+        <div class="profile-section">
+            <div class="avatar-container">
+                <div class="avatar">
+                    <img src="{{ url_for('static', filename='logo.png') }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Avatar" style="padding: 10px; object-fit: contain;">
+                    <div style="display:none;">👵</div>
                 </div>
-                
-                <div class="action-card">
-                    <div class="icon-title">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                        Ajuda
-                    </div>
-                    <p>Precisa de ajuda?<br>Clique aqui</p>
+                <a href="{{ url_for('editar_perfil') }}" class="edit-icon" style="text-decoration:none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="profile-name-row">
+                <a href="#" class="list-item" style="color: var(--primary-blue);">
+                <span style="font-weight: 800;">Código de Vínculo: {% if user.codigo %}{{ user.codigo[0] }}-{{ user.codigo[1] }}-{{ user.codigo[2] }}-{{ user.codigo[3] }}-{{ user.codigo[4] }}{% else %}Não gerado{% endif %}</span>
+            </a></div>
+            <div class="profile-age">{{ user.idade }} anos</div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Progresso geral</h2>
+            <div class="progress-content">
+                <div class="donut">
+                    <div class="donut-inner">75%</div>
+                </div>
+                <div class="progress-text">
+                    <h4>Você está indo<br>muito bem!</h4>
+                    <p>Continue assim e<br>cada dia será mais<br>fácil.</p>
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <h2 class="card-title">Cursos</h2>
+            <div class="course-list">
+                
+                <div class="course-item">
+                    <div class="course-left">
+                        <div class="course-icon icon-check">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span class="course-name">WhatsApp</span>
+                    </div>
+                    <span class="course-status status-concluido">Concluído</span>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-left">
+                        <div class="course-icon icon-check">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <span class="course-name">Meu Celular</span>
+                    </div>
+                    <span class="course-status status-concluido">Concluído</span>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-left">
+                        <div class="course-icon icon-clock">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <span class="course-name">PIX</span>
+                    </div>
+                    <span class="course-status status-andamento">Em andamento &nbsp; 50%</span>
+                </div>
+
+                <div class="course-item">
+                    <div class="course-left">
+                        <div class="course-icon icon-clock">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <span class="course-name">Compras Online</span>
+                    </div>
+                    <span class="course-status status-andamento">Em andamento &nbsp; 20%</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="recommendation">
+            <h3>Próxima recomendação</h3>
+        </div>
+
+        <div class="link-code">
+            Codigo de Vinculo: 1-2-3-4-5
+        </div>
+
+        <button class="btn-delete" onclick="document.getElementById('deleteModal').style.display='flex'">Excluir Conta</button>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="{{ url_for('home') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Início</span>
+            </a>
+            <a href="{{ url_for('aprender') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Aprender</span>
+            </a>
+            <a href="{{ url_for('buscar') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Buscar</span>
+            </a>
+            <a href="{{ url_for('progresso') }}" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="20" x2="12" y2="10"></line>
+                    <line x1="18" y1="20" x2="18" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Progresso</span>
+            </a>
+            <a href="{{ url_for('perfil') }}" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Perfil</span>
+            </a>
+        </div>
+
+        <!-- Delete Modal -->
+        <div id="deleteModal" class="modal-overlay">
+            <div class="modal-card">
+                <h2>Tem Certeza?</h2>
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="document.getElementById('deleteModal').style.display='none'">Cancelar</button>
+                    <!-- Usually goes to a logout or delete action route -->
+                    <a href="{{ url_for('splash') }}" style="text-decoration:none;"><button class="btn-confirm">Excluir</button></a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

@@ -241,21 +241,41 @@
             <h3 class="input-group-title">Digite o código de vínculo</h3>
             <p class="input-group-subtitle">Informe o código exibido no<br>aplicativo do idoso</p>
 
-            <div class="code-inputs">
-                <input type="text" class="code-box" maxlength="1">
-                <input type="text" class="code-box" maxlength="1">
-                <input type="text" class="code-box" maxlength="1">
-                <input type="text" class="code-box" maxlength="1">
-                <input type="text" class="code-box" maxlength="1">
-            </div>
+            <form action="{{ url_for('vincular_conta_action') }}" method="POST" id="vincularForm" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <input type="hidden" name="codigo_completo" id="codigo_completo">
+                
+                <div class="code-inputs" style="width: 100%;">
+                    <input type="text" class="code-box" maxlength="1" oninput="moveToNext(this, 1)">
+                    <input type="text" class="code-box" maxlength="1" oninput="moveToNext(this, 2)" id="box1">
+                    <input type="text" class="code-box" maxlength="1" oninput="moveToNext(this, 3)" id="box2">
+                    <input type="text" class="code-box" maxlength="1" oninput="moveToNext(this, 4)" id="box3">
+                    <input type="text" class="code-box" maxlength="1" oninput="updateHiddenCode()" id="box4">
+                </div>
 
-            <div class="divider">Ou</div>
+                <div class="divider">Ou</div>
 
-            <h3 class="input-group-title">Ou digite o CPF do idoso</h3>
-            <input type="text" class="cpf-input" placeholder="000.000.000-00">
-            <p class="cpf-hint">Apenas você terá acesso a este vinculo</p>
+                <h3 class="input-group-title" style="align-self: flex-start;">Ou digite o CPF do idoso</h3>
+                <input type="text" class="cpf-input" placeholder="000.000.000-00">
+                <p class="cpf-hint">Apenas você terá acesso a este vinculo</p>
 
-            <a href="{{ url_for('familiar_dashboard') }}" class="btn-primary">Vincular conta</a>
+                <button type="submit" class="btn-primary" style="width: 100%;" onclick="updateHiddenCode()">Vincular conta</button>
+            </form>
+            
+            <script>
+                function moveToNext(current, nextFieldId) {
+                    if (current.value.length === current.maxLength) {
+                        document.getElementById('box' + nextFieldId).focus();
+                    }
+                    updateHiddenCode();
+                }
+                
+                function updateHiddenCode() {
+                    let boxes = document.querySelectorAll('.code-box');
+                    let code = "";
+                    boxes.forEach(box => code += box.value);
+                    document.getElementById('codigo_completo').value = code;
+                }
+            </script>
 
         </div>
     </div>

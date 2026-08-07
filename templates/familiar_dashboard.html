@@ -344,17 +344,25 @@
                 <h1 class="header-title">Inicio</h1>
             </div>
 
-            <h2 class="greeting">Olá, Maria Fernada!</h2>
+            <h2 class="greeting">Olá, {{ cuidador.nome.split()[0] if cuidador.nome else 'Familiar' }}!</h2>
             <p class="subtitle">Acompanhe aqui o progresso de seus<br>familiares</p>
 
+            {% if idoso %}
             <div class="profile-card">
-                <h3 class="profile-name">Maria Rosa da Silva</h3>
+                <h3 class="profile-name">{{ idoso.nome }}</h3>
                 <div class="profile-info">
-                    <span class="profile-age">idade: 67 anos</span>
+                    <span class="profile-age">idade: {{ idoso.idade }} anos</span>
                     <span class="tag-active">Ativo</span>
                 </div>
                 <a href="{{ url_for('familiar_perfil') }}" class="profile-link">ver perfil completo</a>
             </div>
+            {% else %}
+            <div class="profile-card" style="text-align: center;">
+                <h3 class="profile-name">Nenhum idoso vinculado</h3>
+                <p style="font-size: 14px; margin-bottom: 15px; margin-top: 5px;">Vincule uma conta para acompanhar as estatísticas.</p>
+                <a href="{{ url_for('familiar_vincular') }}" class="profile-link" style="display:inline-block; padding: 10px 20px; background: var(--primary-blue); color: white; border-radius: 12px; margin-bottom: 10px;">Vincular Agora</a>
+            </div>
+            {% endif %}
 
             <h3 class="section-title">progresso nos cursos</h3>
 

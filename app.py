@@ -5,8 +5,8 @@ app.secret_key = 'tecnoidade_mvp_secret_key'
 
 # Banco de dados simulado em memória
 MOCK_USERS = {
-    "maria@teste.com": {"senha": "123", "tipo": "idoso", "nome": "Maria das Graças"},
-    "ana@teste.com": {"senha": "123", "tipo": "cuidador", "nome": "Ana Paula"}
+    "maria@teste.com": {"senha": "123", "tipo": "idoso", "nome": "Maria das Graças", "telefone": "(83) 99999-9999", "idade": 67, "codigo": "12345"},
+    "ana@teste.com": {"senha": "123", "tipo": "cuidador", "nome": "Ana Paula", "telefone": "(83) 98888-8888", "idade": 35, "vinculados": []}
 }
 
 # -------------------------------------------------------------
@@ -47,6 +47,8 @@ def entrar():
             if user['tipo'] == 'idoso':
                 return redirect(url_for('home'))
             else:
+                if not user.get('vinculados'):
+                    return redirect(url_for('familiar_vincular'))
                 return redirect(url_for('familiar_dashboard'))
         else:
             erro = "Dados incorretos. Por favor, tente novamente."
@@ -96,7 +98,46 @@ def buscar():
 
 @app.route('/perfil')
 def perfil():
-    return render_template('tela_inicial.html')
+    email = session.get('email', 'maria@teste.com')
+    user = MOCK_USERS.get(email, {"nome": "Usuário", "idade": 60})
+    return render_template('tela_inicial.html', user=user)
+
+@app.route('/editar_perfil')
+def editar_perfil():
+    email = session.get('email', 'maria@teste.com')
+    user = MOCK_USERS.get(email, {"nome": "Usuário", "telefone": ""})
+    return render_template('editar_perfil.html', user=user, email=email)
+
+@app.route('/editar_perfil_idoso_action', methods=['POST'])
+def editar_perfil_idoso_action():
+    old_email = session.get('email')
+    
+    nome = request.form.get('nome', '').strip()
+    novo_email = request.form.get('email', '').strip().lower()
+    senha = request.form.get('senha', '').strip()
+    telefone = request.form.get('telefone', '').strip()
+    
+    if not old_email or old_email not in MOCK_USERS:
+        return redirect(url_for('boas_vindas'))
+    
+    user_data = MOCK_USERS[old_email]
+    
+    if nome:
+        user_data['nome'] = nome
+        session['nome'] = nome
+    if telefone:
+        user_data['telefone'] = telefone
+    if senha and len(senha) >= 6:
+        user_data['senha'] = senha
+        
+    # Se mudou de email, precisamos atualizar a chave do dicionario e a sessao
+    if novo_email and novo_email != old_email:
+        MOCK_USERS[novo_email] = user_data
+        del MOCK_USERS[old_email]
+        session['email'] = novo_email
+        
+    flash("Perfil atualizado com sucesso!")
+    return redirect(url_for('perfil'))
 
 @app.route('/progresso')
 def progresso():
@@ -161,8 +202,15 @@ def familiar_vincular():
 
 @app.route('/familiar_dashboard')
 def familiar_dashboard():
-    nome = session.get('nome', 'Ana Paula')
-    return render_template('familiar_dashboard.html', nome=nome)
+    email = session.get('email', 'ana@teste.com')
+    cuidador = MOCK_USERS.get(email, {"nome": "Familiar", "vinculados": []})
+    
+    idoso_vinculado = None
+    if cuidador.get('vinculados'):
+        idoso_email = cuidador['vinculados'][0]
+        idoso_vinculado = MOCK_USERS.get(idoso_email)
+        
+    return render_template('familiar_dashboard.html', cuidador=cuidador, idoso=idoso_vinculado)
 
 @app.route('/familiar_lista')
 def familiar_lista():
@@ -317,8 +365,31 @@ def login_biometria_action():
 
 @app.route('/vincular_conta_action', methods=['POST'])
 def vincular_conta_action():
-    flash("Vínculo efetuado com sucesso")
-    return redirect(url_for('familiar_dashboard'))
+    codigo = request.form.get('codigo_completo', '').strip()
+    email_cuidador = session.get('email')
+    
+    if not email_cuidador or email_cuidador not in MOCK_USERS:
+        return redirect(url_for('boas_vindas'))
+        
+    cuidador = MOCK_USERS[email_cuidador]
+    
+    # Buscar idoso com esse codigo
+    idoso_encontrado = None
+    for email_idoso, dados in MOCK_USERS.items():
+        if dados.get('tipo') == 'idoso' and dados.get('codigo') == codigo:
+            idoso_encontrado = email_idoso
+            break
+            
+    if idoso_encontrado:
+        if 'vinculados' not in cuidador:
+            cuidador['vinculados'] = []
+        if idoso_encontrado not in cuidador['vinculados']:
+            cuidador['vinculados'].append(idoso_encontrado)
+        flash("Vínculo efetuado com sucesso")
+        return redirect(url_for('familiar_dashboard'))
+    else:
+        flash("Código não encontrado. Verifique com o idoso.")
+        return redirect(url_for('familiar_vincular'))
 
 @app.route('/excluir_conta_action', methods=['POST'])
 def excluir_conta_action():

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Editar Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #3235F2;
+            --bg-light: #E8F1FC;
+            --white: #FFFFFF;
+            --text-dark: #333333;
+            --text-muted: #666666;
+            --error-red: #FF4B4B;
+            --error-bg: #FFE5E5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #E0E0E0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            min-height: 100vh; height: 100%; margin: 0 auto;
+            background-color: var(--bg-light);
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Background Waves */
+        .bg-wave {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        .bg-wave.top {
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+        
+        .bg-wave.bottom {
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: #DCEAFB;
+            border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #d1e5fa;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo {
+            width: 160px;
+            margin-bottom: 20px;
+        }
+
+        .titles {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .titles h1 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .titles p {
+            font-size: 13px;
+            color: #4a5c78;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Form */
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 900;
+            color: #222;
+            margin-bottom: 8px;
+            margin-left: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: var(--white);
+            border: none;
+            border-radius: 12px;
+            padding: 16px 15px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+            font-weight: 600;
+        }
+
+        /* Error state */
+        .form-group.has-error input {
+            background-color: var(--error-bg);
+            border: 1px solid var(--error-red);
+            color: var(--error-red);
+        }
+        
+        .form-group.has-error input::placeholder {
+            color: var(--error-red);
+        }
+
+        .info-box {
+            background-color: #D6E4F8;
+            border-radius: 12px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+
+        .info-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            flex-shrink: 0;
+        }
+
+        .info-text {
+            font-size: 10px;
+            color: #333;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .info-text strong {
+            color: var(--primary-blue);
+            font-weight: 900;
+        }
+
+        .btn-save {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 15px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 800;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(50, 53, 242, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .btn-save svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+        }
+
+        /* Bottom buttons */
+        .bottom-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+
+        .action-btn {
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="bg-wave top"></div>
+        <div class="bg-wave bottom"></div>
+
+        <div class="content">
+            <div class="avatar">
+                <img src="{{ url_for('static', filename='Aprender Tecnologia.png') }}" onerror="this.src='https://i.pravatar.cc/150?img=47'">
+            </div>
+            
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="TecnoIdade">
+
+            <div class="titles">
+                <h1>Edite suas informações</h1>
+                <p>É rápido, facil e seus dados<br>estão protegidos.</p>
+            </div>
+
+            <form id="editForm" style="width: 100%;" action="{{ url_for('editar_perfil_idoso_action') }}" method="POST" onsubmit="return validateForm(event)">
+                <div class="form-group">
+                    <label>Nome completo</label>
+                    <input type="text" name="nome" value="{{ user.nome }}" placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" name="email" value="{{ email }}" placeholder="Digite seu melhor e-mail">
+                </div>
+
+                <div class="form-group" id="senha-group">
+                    <label>Senha</label>
+                    <input type="password" name="senha" id="senha-input" placeholder="Digite uma senha segura de 6 caracteres (Deixe em branco para manter)">
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="text" name="telefone" value="{{ user.telefone }}" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <div class="info-text">
+                        Seus dados são usados apenas para melhorar<br>sua experiência no <strong>TecnoIdade.</strong>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-save">
+                    Salvar 
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="bottom-actions">
+                <a href="#" class="action-btn">
+                    <i class="fa-solid fa-volume-high"></i> Ouvir
+                </a>
+                <a href="#" class="action-btn">
+                    <i class="fa-regular fa-circle-question"></i> Ajuda
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            var senhaInput = document.getElementById('senha-input');
+            var senhaGroup = document.getElementById('senha-group');
+            
+            // Allow empty password (meaning no change) but if provided, must be >= 6 chars
+            if(senhaInput.value.length > 0 && senhaInput.value.length < 6) {
+                senhaGroup.classList.add('has-error');
+                senhaInput.value = "";
+                senhaInput.placeholder = "A senha deve conter no minimo 6 caracteres";
+                event.preventDefault(); // Stop submission
+                return false;
+            }
+            
+            senhaGroup.classList.remove('has-error');
+            return true;
+        }
+    </script>
+</body>
+</html>
