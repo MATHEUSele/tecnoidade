@@ -194,7 +194,8 @@ def curso_gov():
 
 @app.route('/curso_concluido')
 def curso_concluido():
-    return render_template('curso_concluido.html')
+    curso = request.args.get('curso', '')
+    return render_template('curso_concluido.html', curso=curso)
 
 # -------------------------------------------------------------
 # FLUXO DO CUIDADOR

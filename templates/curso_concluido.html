@@ -208,6 +208,34 @@
         .btn-home:active {
             transform: scale(0.95);
         }
+        
+        .btn-share {
+            background-color: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            text-align: center;
+            padding: 18px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: calc(100% - 40px);
+            margin: 0 20px 20px 20px;
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-share:active {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+        
+        .btn-share svg { width: 22px; height: 22px; }
 
     </style>
 </head>
@@ -245,7 +273,7 @@
 
             <h1 class="title-gradient">Parabéns!</h1>
             
-            <h2 class="subtitle">Curso concluído<br>com sucesso!</h2>
+            <h2 class="subtitle">Curso{% if curso %} de {{ curso }}{% endif %} concluído<br>com sucesso!</h2>
 
             <div class="message-card">
                 <p>Você deu mais um grande passo no mundo da tecnologia. <span>Estamos muito orgulhosos de você!</span> Continue aprendendo com o TecnoIdade.</p>
@@ -253,8 +281,35 @@
             
         </div>
 
+        <button onclick="shareCourse()" class="btn-share">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            Compartilhar Conquista
+        </button>
+
         <a href="{{ url_for('home') }}" class="btn-home">Voltar para a tela inicial</a>
 
     </div>
+
+    <script>
+        function shareCourse() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'TecnoIdade - Curso Concluído',
+                    text: 'Acabei de concluir {% if curso %}o curso de {{ curso }}{% else %}um curso{% endif %} no aplicativo TecnoIdade!',
+                    url: 'https://tecnoidade.com' // Example URL or window.location.href
+                })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
+            } else {
+                alert('Compartilhamento não suportado neste dispositivo/navegador.');
+            }
+        }
+    </script>
 </body>
 </html>
