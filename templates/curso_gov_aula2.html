@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoIdade - Protegendo suas redes sociais</title>
+    <title>TecnoIdade - Gov - Aula 2</title>
     <style>
         :root {
             --primary-blue: #1A368F;
@@ -26,12 +26,12 @@
     <div class="mobile-container">
         <div class="header">
             <a href="{{ url_for('aprender') }}" class="btn-back"><</a>
-            <h1>Segurança Digital</h1>
+            <h1>Gov</h1>
         </div>
         <div class="content">
-            <h2>Protegendo suas redes sociais</h2>
-                        <div class="video-container" style="width: 100%; border-radius: 15px; overflow: hidden; position: relative; margin-bottom: 15px; background-color: #000; aspect-ratio: 16/9;">
-                <img src="{{ url_for('static', filename='images/seguranca_thumbnail.png') }}" alt="Video thumbnail" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+            <h2>Gov - Aula 2</h2>
+                                    <div class="video-container" style="width: 100%; border-radius: 15px; overflow: hidden; position: relative; margin-bottom: 15px; background-color: #000; aspect-ratio: 16/9;">
+                <img src="{{ url_for('static', filename='images/gov_thumbnail.png') }}" alt="Video thumbnail" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
                 <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background-color: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
                     <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: currentColor; margin-left: 3px;">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -41,18 +41,19 @@
                     <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                     <span>0:00/2:45</span>
                     <div class="video-bar" style="flex-grow: 1; height: 4px; background-color: rgba(255,255,255,0.4); border-radius: 2px; position: relative;">
-                        <div class="video-bar-fill" style="position: absolute; left: 0; top: 0; height: 100%; width: 30%; background-color: #1A368F; border-radius: 2px;"></div>
+                        <div class="video-bar-fill" style="position: absolute; left: 0; top: 0; height: 100%; width: 30%; background-color: #4A56E2; border-radius: 2px;"></div>
                     </div>
                 </div>
             </div>
-            <p>Nesta aula você aprenderá sobre Protegendo suas redes sociais. Assista o vídeo ou siga o simulador passo a passo para continuar aprendendo.</p>
+            </div>
+            <p>Nesta aula você aprenderá sobre Gov - Aula 2. Assista o vídeo ou siga o simulador passo a passo para continuar aprendendo.</p>
             <ul style="margin-left: 20px; margin-bottom: 20px; color: #555; font-size: 14px;">
                 <li style="margin-bottom: 5px;">Passo 1: Entendendo o conceito</li>
                 <li style="margin-bottom: 5px;">Passo 2: Praticando</li>
                 <li style="margin-bottom: 5px;">Passo 3: Conclusão</li>
             </ul>
         </div>
-        <a href="{{ url_for('curso_seguranca_aula7') }}" class="btn-primary">Próxima Aula</a>
+        <a href="{{ url_for('curso_gov_aula3') }}" class="btn-primary">Próxima Aula</a>
     </div>
 </body>
 </html>

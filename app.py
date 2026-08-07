@@ -359,6 +359,34 @@ def tela_3():
 def termos_uso():
     return render_template('termos_uso.html')
 
+@app.route('/curso_celular_aula1')
+def curso_celular_aula1():
+    return render_template('curso_celular_aula1.html')
+
+@app.route('/curso_celular_aula2')
+def curso_celular_aula2():
+    return render_template('curso_celular_aula2.html')
+
+@app.route('/curso_celular_aula3')
+def curso_celular_aula3():
+    return render_template('curso_celular_aula3.html')
+
+@app.route('/curso_celular_aula4')
+def curso_celular_aula4():
+    return render_template('curso_celular_aula4.html')
+
+@app.route('/curso_gov_aula1')
+def curso_gov_aula1():
+    return render_template('curso_gov_aula1.html')
+
+@app.route('/curso_gov_aula2')
+def curso_gov_aula2():
+    return render_template('curso_gov_aula2.html')
+
+@app.route('/curso_gov_aula3')
+def curso_gov_aula3():
+    return render_template('curso_gov_aula3.html')
+
 if __name__ == '__main__':
     print("Iniciando o MVP TecnoIdade...")
     print("Abra no seu navegador: http://127.0.0.1:5000/")
