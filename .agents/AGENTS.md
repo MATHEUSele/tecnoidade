@@ -2,3 +2,5 @@
 - Não invente, não presuma e não crie telas de interface (HTML/CSS) baseadas em placeholders ou ideias genéricas.
 - O agente deve **exclusivamente** construir telas quando o usuário fornecer a imagem/design daquela tela em específico.
 - Não crie absolutamente nada que o usuário não pedir explicitamente.
+
+- Lembrete: Antes do commit final do projeto, lembrar o usu�rio de revisar a responsividade de todas as telas.

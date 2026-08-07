@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecnoIdade - Curso Concluído</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-green: #388E3C;
-            --text-dark: #333333;
-            --btn-gray: #DCDCDC;
+            --primary-green: #4CAF50;
+            --dark-green: #2E7D32;
+            --gold: #FFD700;
+            --text-dark: #2a333d;
+            --bg-light: #E8F5E9;
             --white: #FFFFFF;
         }
 
@@ -16,11 +19,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,99 +34,179 @@
             width: 100%;
             max-width: 414px;
             height: 896px;
-            background-color: var(--white);
+            background-color: var(--bg-light);
             position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            overflow-x: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden; /* Hide confetti overflow */
             display: flex;
             flex-direction: column;
-            padding: 20px;
+        }
+
+        /* Confetti Animation */
+        .confetti-container {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #f2d74e;
+            animation: fall linear infinite;
+        }
+        .confetti:nth-child(1) { left: 10%; background-color: #4CAF50; animation-duration: 3s; animation-delay: 0s; }
+        .confetti:nth-child(2) { left: 20%; background-color: #323dff; animation-duration: 4s; animation-delay: 0.5s; }
+        .confetti:nth-child(3) { left: 30%; background-color: #FF5722; animation-duration: 2.5s; animation-delay: 1s; }
+        .confetti:nth-child(4) { left: 40%; background-color: #FFD700; animation-duration: 3.5s; animation-delay: 0.2s; }
+        .confetti:nth-child(5) { left: 50%; background-color: #E91E63; animation-duration: 3s; animation-delay: 1.5s; }
+        .confetti:nth-child(6) { left: 60%; background-color: #4CAF50; animation-duration: 4s; animation-delay: 0.8s; }
+        .confetti:nth-child(7) { left: 70%; background-color: #9C27B0; animation-duration: 2.8s; animation-delay: 0.3s; }
+        .confetti:nth-child(8) { left: 80%; background-color: #FF5722; animation-duration: 3.2s; animation-delay: 1.2s; }
+        .confetti:nth-child(9) { left: 90%; background-color: #323dff; animation-duration: 3.8s; animation-delay: 0.6s; }
+
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(896px) rotate(360deg); opacity: 0; }
         }
 
         .header-top {
             display: flex;
             align-items: center;
-            margin-top: 40px;
-            margin-bottom: 50px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
         }
         
         .btn-back {
-            background-color: #F0F0F0;
-            width: 40px;
-            height: 40px;
+            background-color: var(--white);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #333;
             text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
-        .btn-back svg {
-            width: 20px;
-            height: 20px;
-        }
+        .btn-back svg { width: 24px; height: 24px; }
 
         .content-area {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             padding: 20px;
             position: relative;
+            z-index: 10;
+            text-align: center;
         }
 
-        .title-dark {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            line-height: 1.1;
+        /* Trophy Animation */
+        .trophy-wrapper {
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
         }
 
-        .title-green {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--primary-green);
-            line-height: 1.1;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .trophy-circle {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #FFD700, #FDB931);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
             position: relative;
         }
 
-        .title-green::after {
+        /* Glowing effect behind trophy */
+        .trophy-circle::before {
             content: '';
             position: absolute;
-            left: 0;
-            right: 0;
-            top: -20px;
-            height: 1px;
-            background-color: #E0E0E0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            filter: blur(20px);
+            opacity: 0.6;
+            z-index: -1;
         }
 
-        .check-icon {
-            color: var(--primary-green);
-            display: inline-block;
-            margin-left: 10px;
+        .trophy-icon {
+            font-size: 80px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
         }
-        
-        .check-icon svg {
-            width: 48px;
-            height: 48px;
-            stroke-width: 3;
+
+        .title-gradient {
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #4CAF50, #1b5e20);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .message-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .message-card p {
+            font-size: 16px;
+            color: #555;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .message-card span {
+            color: var(--primary-green);
+            font-weight: 900;
         }
 
         .btn-home {
-            background-color: var(--btn-gray);
-            color: var(--text-dark);
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            color: var(--white);
             text-align: center;
             padding: 20px;
             border-radius: 30px;
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 900;
             text-decoration: none;
-            margin-bottom: 40px;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
             display: block;
-            width: 100%;
+            width: calc(100% - 40px);
+            margin: 0 20px 40px 20px;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.2s;
+        }
+        
+        .btn-home:active {
+            transform: scale(0.95);
         }
 
     </style>
@@ -131,6 +214,19 @@
 <body>
     <div class="mobile-container">
         
+        <!-- Confetti Background -->
+        <div class="confetti-container">
+            <div class="confetti"></div>
+            <div class="confetti" style="border-radius: 50%;"></div>
+            <div class="confetti"></div>
+            <div class="confetti" style="border-radius: 50%;"></div>
+            <div class="confetti"></div>
+            <div class="confetti" style="border-radius: 50%;"></div>
+            <div class="confetti"></div>
+            <div class="confetti" style="border-radius: 50%;"></div>
+            <div class="confetti"></div>
+        </div>
+
         <div class="header-top">
             <a href="{{ url_for('progresso') }}" class="btn-back">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -140,26 +236,24 @@
         </div>
 
         <div class="content-area">
-            <h1 class="title-dark">Parabéns!</h1>
-            <div style="position: relative; padding-top: 20px;">
-                <!-- simulate horizontal line -->
-                <div style="position: absolute; top: 0; left: -20px; right: -20px; height: 1px; background-color: #E0E0E0;"></div>
-                
-                <h1 class="title-green">
-                    Curso<br>
-                    concluido<br>
-                    com<br>
-                    sucesso!!
-                    <span class="check-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </span>
-                </h1>
+            
+            <div class="trophy-wrapper">
+                <div class="trophy-circle">
+                    <div class="trophy-icon">🏆</div>
+                </div>
             </div>
+
+            <h1 class="title-gradient">Parabéns!</h1>
+            
+            <h2 class="subtitle">Curso concluído<br>com sucesso!</h2>
+
+            <div class="message-card">
+                <p>Você deu mais um grande passo no mundo da tecnologia. <span>Estamos muito orgulhosos de você!</span> Continue aprendendo com o TecnoIdade.</p>
+            </div>
+            
         </div>
 
-        <a href="{{ url_for('home') }}" class="btn-home">Voltar para tela de inicio!</a>
+        <a href="{{ url_for('home') }}" class="btn-home">Voltar para a tela inicial</a>
 
     </div>
 </body>
