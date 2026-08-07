@@ -12,7 +12,7 @@
         :root { --primary-blue: #323dff; --bg-light: #e5f1ff; --text-dark: #2a333d; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
         body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .mobile-container { background-color: var(--bg-light); width: 100%; max-width: 414px; height: 100vh; max-height: 896px; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .mobile-container { background-color: var(--bg-light); width: 100%; max-width: 414px; height: 100vh; max-min-height: 100vh; height: 100%; margin: 0 auto; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         @media (max-width: 420px) { .mobile-container { height: 100vh; max-height: none; box-shadow: none; } body { background-color: var(--bg-light); } }
         .bg-shape { position: absolute; z-index: 0; border-radius: 50%; filter: blur(1px); }
         .shape-1 { top: -10%; left: -20%; width: 350px; height: 350px; background: #d1e5fa; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }

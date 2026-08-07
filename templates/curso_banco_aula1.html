@@ -3,42 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoIdade - O que é um banco digital?</title>
+    <title>TecnoIdade - Banco Digital - Aula 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #1A368F;
-            --text-dark: #000000;
+            --theme-primary: #1A368F;
+            --theme-dark: #001C66;
+            --theme-light: #E8F1FC;
+            --btn-green: #388E3C;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #e5e5e5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .mobile-container { width: 100%; max-width: 414px; height: 896px; background-color: #E8F1FC; padding: 20px; overflow-y: auto; border: 4px solid #333; border-radius: 40px; display: flex; flex-direction: column; }
-        .header { display: flex; align-items: center; margin-top: 30px; margin-bottom: 20px; }
-        .btn-back { width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #333; font-weight: bold; font-size: 20px; }
-        h1 { flex-grow: 1; text-align: center; color: var(--primary-blue); font-size: 22px; margin-right: 40px; }
-        .content { flex-grow: 1; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        h2 { font-size: 20px; color: var(--text-dark); margin-bottom: 15px; }
-        .video-placeholder { width: 100%; height: 200px; background: #ddd; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; font-weight: bold; color: #888; }
-        p { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 20px; }
-        .btn-primary { display: block; width: 100%; padding: 15px; background: var(--primary-blue); color: white; text-align: center; border-radius: 15px; text-decoration: none; font-weight: bold; margin-top: auto; }
+        body { background-color: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            min-height: 100vh;
+            height: 100%;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 20px 10px 20px;
+        }
+
+        .btn-back {
+            background-color: #E0E0E0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .header-center {
+            text-align: center;
+            flex-grow: 1;
+            padding: 0 10px;
+        }
+        
+        .header-center h1 {
+            color: var(--theme-primary);
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .sound-icon {
+            color: var(--theme-primary);
+        }
+
+        .title-section {
+            text-align: center;
+            padding: 5px 20px 15px 20px;
+        }
+
+        .title-section .lesson-count {
+            font-size: 14px;
+            font-weight: 800;
+            color: #000;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .title-section .lesson-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--theme-dark);
+        }
+
+        .video-wrapper {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background-color: #000;
+            aspect-ratio: 4/3;
+        }
+
+        .video-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .video-bar {
+            flex-grow: 1;
+            height: 4px;
+            background-color: rgba(255,255,255,0.4);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .video-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background-color: #FFF;
+            border-radius: 2px;
+        }
+
+        .desc-text {
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .desc-icon {
+            color: var(--theme-primary);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .learning-card {
+            margin: 0 20px 25px 20px;
+            background-color: var(--theme-light);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .learning-card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--theme-primary);
+            font-size: 16px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .check-list {
+            list-style: none;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #444;
+            margin-bottom: 12px;
+        }
+
+        .check-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            color: var(--theme-primary);
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+        }
+
+        .activities-title {
+            padding: 0 20px;
+            color: var(--theme-primary);
+            font-size: 16px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .action-box {
+            margin: 0 20px 30px 20px;
+            background-color: #E0E0E0;
+            border-radius: 20px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .action-box-icon {
+            color: var(--theme-dark);
+        }
+
+        .action-box-text h4 {
+            font-size: 15px;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 3px;
+        }
+
+        .action-box-text p {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .btn-next {
+            margin: auto 20px 30px 20px;
+            display: block;
+            background-color: var(--btn-green);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 30px;
+            font-size: 22px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(56, 142, 60, 0.4);
+            transition: transform 0.2s;
+        }
+        
+        .btn-next:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
     <div class="mobile-container">
-        <div class="header">
-            <a href="{{ url_for('aprender') }}" class="btn-back"><</a>
-            <h1>Banco Digital</h1>
+        
+        <div class="header-top">
+            <a href="{{ url_for('aprender') }}" class="btn-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+            <div class="header-center">
+                <h1>Banco Digital</h1>
+            </div>
+            <div class="sound-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+            </div>
         </div>
-        <div class="content">
-            <h2>O que é um banco digital?</h2>
-            <div class="video-placeholder">Vídeo / Simulador da Aula</div>
-            <p>Nesta aula você aprenderá sobre O que é um banco digital?. Assista o vídeo ou siga o simulador passo a passo para continuar aprendendo.</p>
-            <ul style="margin-left: 20px; margin-bottom: 20px; color: #555; font-size: 14px;">
-                <li style="margin-bottom: 5px;">Passo 1: Entendendo o conceito</li>
-                <li style="margin-bottom: 5px;">Passo 2: Praticando</li>
-                <li style="margin-bottom: 5px;">Passo 3: Conclusão</li>
+
+        <div class="title-section">
+            <span class="lesson-count">Aula 1 de 8</span>
+            <h2 class="lesson-title">O que é um banco digital?</h2>
+        </div>
+
+        <div class="video-wrapper">
+            <div class="video-container">
+                <img src="{{ url_for('static', filename='images/curso_banco_aula1.png') }}" alt="Video thumbnail">
+                <div class="play-overlay">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28" style="margin-left:4px;">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+                <div class="video-controls">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>0:00/2:45</span>
+                    <div class="video-bar">
+                        <div class="video-bar-fill"></div>
+                    </div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="desc-text">
+            <div class="desc-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+            </div>
+            <p>Nesta aula: Entenda a diferença entre bancos tradicionais e digitais, e como eles funcionam.</p>
+        </div>
+
+        <div class="learning-card">
+            <div class="learning-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+                    <path d="M9 18h6m-3-15a5.5 5.5 0 0 0-5.5 5.5c0 2.2 1.3 4 3 5V15a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-1.5c1.7-1 3-2.8 3-5A5.5 5.5 0 0 0 12 3Z"></path>
+                </svg>
+                <span>Você vai aprender:</span>
+            </div>
+            <ul class="check-list">
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="20" height="20" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" stroke="none" fill="rgba(255,255,255,0.8)"></circle>
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Sem agências físicas
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="20" height="20" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" stroke="none" fill="rgba(255,255,255,0.8)"></circle>
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Taxas menores
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="20" height="20" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" stroke="none" fill="rgba(255,255,255,0.8)"></circle>
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Colocando em prática
+                </li>
             </ul>
         </div>
-        <a href="{{ url_for('curso_banco_aula2') }}" class="btn-primary">Próxima Aula</a>
+
+        <h3 class="activities-title">Atividades desta aula</h3>
+
+        <div class="action-box">
+            <div class="action-box-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+            </div>
+            <div class="action-box-text">
+                <h4>Assistir ao Vídeo</h4>
+                <p>Assista ao vídeo completo<br>para continuar</p>
+            </div>
+        </div>
+
+        <a href="{{ url_for('curso_banco_aula2') }}" class="btn-next">Próxima aula</a>
+
     </div>
 </body>
 </html>
