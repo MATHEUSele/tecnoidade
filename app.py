@@ -470,7 +470,10 @@ def curso_compras_aula2():
 def curso_compras_aula3():
     return render_template('curso_compras_aula3.html')
 
-if __name__ == '__main__':
-    print("Iniciando o MVP TecnoIdade...")
-    print("Abra no seu navegador: http://127.0.0.1:5000/")
-    app.run(debug=True, port=5000)
+import os
+
+if __name__ == "__main__":
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
