@@ -488,7 +488,7 @@ def curso_gov_aula3():
     return render_template('curso_gov_aula3.html')
 
 @app.route('/curso_compras_aula1')
-def curso_compras_aula1():
+def cgiturso_compras_aula1():
     return render_template('curso_compras_aula1.html')
 
 @app.route('/curso_compras_aula2')
@@ -506,3 +506,4 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000))
     )
+    
