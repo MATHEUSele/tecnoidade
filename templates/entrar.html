@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="google-btn-container">
-                    <a href="#" class="google-btn">Entrar com o google</a>
+                    <a href="{{ url_for('login_google') }}" class="google-btn">Entrar com o google</a>
                 </div>
 
                 <button type="submit" class="submit-btn">
@@ -134,9 +134,8 @@
 
             <div class="footer-terms">
                 Ao entrar, você concorda com nossa<br>
-                <a href="#" class="uppercase">Politica de Privacidade</a><br>
-                <br>
-                <a href="#">Termos de uso</a>
+                <a href="{{ url_for('politica_privacidade') }}" class="uppercase">Politica de Privacidade</a><br>
+                <a href="{{ url_for('termos_uso') }}">Termos de uso</a>
             </div>
         </div>
     </div>

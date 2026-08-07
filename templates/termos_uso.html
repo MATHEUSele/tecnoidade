@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecnoIdade - Termos de Uso</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-blue: #3A45B8;
@@ -176,6 +177,13 @@
             margin-bottom: 15px;
         }
 
+        .submit-btn { width: 100%; background-color: var(--primary-blue); color: white; border: none; padding: 16px 25px; border-radius: 16px; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(58, 69, 184, 0.35); text-decoration: none; margin-top: 10px; margin-bottom: 12px; }
+        
+        .decline-btn { width: 100%; background-color: transparent; color: #d32f2f; border: 2px solid #d32f2f; padding: 14px 25px; border-radius: 16px; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; text-decoration: none; margin-bottom: 20px; transition: background 0.2s; }
+        .decline-btn:active { background-color: #ffebee; }
+        
+        .form-container { width: 100%; padding: 0 20px; margin-bottom: 30px; display: flex; flex-direction: column; }
+
     </style>
 </head>
 <body>
@@ -222,7 +230,18 @@
                 <p class="policy-text">Para utilizar determinadas funcionalidades, o usuário poderá realizar um cadastro fornecendo informações básicas, como nome, e-mail e senha.</p>
             </div>
             
-            <div style="height: 40px;"></div> <!-- padding bottom -->
+            <form method="POST" action="{{ url_for('termos_uso') }}" class="form-container">
+                <button type="submit" name="acao" value="aceitar" class="submit-btn">
+                    <i class="fa-solid fa-check"></i>
+                    Aceitar e Continuar
+                </button>
+                <button type="submit" name="acao" value="recusar" class="decline-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                    Recusar
+                </button>
+            </form>
+            
+            <div style="height: 20px;"></div> <!-- padding bottom -->
         </div>
     </div>
 </body>
