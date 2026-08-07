@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoIdade - Aceitar Termos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #323dff;
+            --bg-light: #e5f1ff;
+            --text-dark: #2a333d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+        body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .mobile-container { background-color: var(--bg-light); width: 100%; max-width: 414px; height: 100vh; margin: 0 auto; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        @media (max-width: 420px) { .mobile-container { height: 100vh; box-shadow: none; } body { background-color: var(--bg-light); } }
+        
+        .bg-shape { position: absolute; z-index: 0; border-radius: 50%; filter: blur(1px); }
+        .shape-1 { top: -10%; left: -20%; width: 350px; height: 350px; background: #d1e5fa; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .shape-2 { top: -15%; right: -15%; width: 300px; height: 300px; background: #c3dcf8; border-radius: 50% 50% 40% 60% / 60% 40% 70% 40%; }
+        .shape-3 { bottom: -5%; left: -20%; width: 380px; height: 380px; background: #c3dcf8; border-radius: 30% 70% 50% 50% / 40% 40% 60% 60%; opacity: 0.8; }
+        .shape-4 { bottom: -15%; right: -10%; width: 250px; height: 250px; background: #d4e7fb; border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+        
+        .content { position: relative; z-index: 10; padding: 25px 20px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        
+        .icon-container { width: 90px; height: 90px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--primary-blue); box-shadow: 0 10px 20px rgba(50, 61, 255, 0.15); margin-bottom: 25px; }
+        
+        h2 { color: #3b3b6d; font-size: 24px; font-weight: 900; line-height: 1.2; margin-bottom: 15px; }
+        p { color: #2a333d; font-size: 15px; font-weight: 700; line-height: 1.4; margin-bottom: 30px; }
+        
+        .links-container { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); width: 100%; margin-bottom: 30px; display: flex; flex-direction: column; gap: 15px; }
+        .doc-link { display: flex; align-items: center; gap: 12px; color: var(--text-dark); text-decoration: none; font-weight: 800; font-size: 16px; padding: 12px; border-radius: 12px; background: #f8f9fa; transition: background 0.2s; }
+        .doc-link:active { background: #e9ecef; }
+        .doc-link i { color: var(--primary-blue); font-size: 20px; width: 24px; text-align: center; }
+        
+        .submit-btn { width: 100%; background-color: var(--primary-blue); color: white; border: none; padding: 18px 25px; border-radius: 16px; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(50, 61, 255, 0.35); text-decoration: none; margin-top: auto; margin-bottom: 20px; }
+        
+        .form-container { width: 100%; display: flex; flex-direction: column; flex: 1; }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+        <div class="bg-shape shape-4"></div>
+
+        <div class="content">
+            <div class="icon-container">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+            
+            <h2>Para Continuar</h2>
+            <p>Por favor, leia e aceite nossos Termos de Uso e Política de Privacidade para finalizar seu login e acessar o aplicativo.</p>
+            
+            <div class="links-container">
+                <a href="{{ url_for('termos_uso') }}" class="doc-link" target="_blank">
+                    <i class="fa-solid fa-file-contract"></i>
+                    Ler Termos de Uso
+                </a>
+                <a href="{{ url_for('politica_privacidade') }}" class="doc-link" target="_blank">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Ler Política de Privacidade
+                </a>
+            </div>
+            
+            <form method="POST" action="{{ url_for('aceitar_termos') }}" class="form-container">
+                <button type="submit" class="submit-btn">
+                    <i class="fa-solid fa-check"></i>
+                    Li e Aceito
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

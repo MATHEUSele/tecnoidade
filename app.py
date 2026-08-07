@@ -44,16 +44,29 @@ def entrar():
             session['nome'] = user['nome']
             session['tipo'] = user['tipo']
             
-            if user['tipo'] == 'idoso':
-                return redirect(url_for('home'))
-            else:
-                if not user.get('vinculados'):
-                    return redirect(url_for('familiar_vincular'))
-                return redirect(url_for('familiar_dashboard'))
+            return redirect(url_for('aceitar_termos'))
         else:
             erro = "Dados incorretos. Por favor, tente novamente."
             
     return render_template('entrar.html', erro=erro, tipo=tipo_esperado)
+
+@app.route('/aceitar_termos', methods=['GET', 'POST'])
+def aceitar_termos():
+    if request.method == 'POST':
+        tipo = session.get('tipo', 'idoso')
+        email = session.get('email')
+        if not email:
+            return redirect(url_for('boas_vindas'))
+            
+        user = MOCK_USERS.get(email, {})
+        if tipo == 'idoso':
+            return redirect(url_for('home'))
+        else:
+            if not user.get('vinculados'):
+                return redirect(url_for('familiar_vincular'))
+            return redirect(url_for('familiar_dashboard'))
+            
+    return render_template('aceitar_termos.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -471,6 +484,14 @@ def curso_compras_aula3():
     return render_template('curso_compras_aula3.html')
 
 import os
+
+@app.route('/termos_uso')
+def termos_uso():
+    return render_template('termos_uso.html')
+
+@app.route('/politica_privacidade')
+def politica_privacidade():
+    return render_template('politica_privacidade.html')
 
 if __name__ == "__main__":
     app.run(
